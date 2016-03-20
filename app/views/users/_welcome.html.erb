@@ -1,0 +1,44 @@
+
+<%= bootstrap_form_for( @users) do |f| %>
+
+    <% if @users.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @users.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+    <% end %>
+
+
+        <h1><b> Choice  Interests  </b> </h1>
+
+          <% Category.all.each do |category| %>
+              <%= check_box_tag 'user[category_ids][]', category.id,
+                                @users.category_ids.include?(category.id), id: dom_id(category) %>
+              <%= label_tag dom_id(category), category.name, class: "check_box_label" %>
+          <% end %>
+
+
+      <%= f.text_field :password, :class => 'form-control', :placeholder=>"Enter Your Pass word" %>
+
+
+      <%= f.hidden_field :email, :class => 'form-control',:value => current_user.email if current_user %>
+
+
+
+      <%= f.hidden_field :password_hash, :class => 'form-control' %>
+
+
+
+      <br>
+
+      <%= f.submit  "Submit", :class => 'btn btn-primary', :style=>"width:500px" %>
+
+<% end %>

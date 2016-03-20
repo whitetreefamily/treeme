@@ -1,0 +1,48 @@
+<style>
+    .box-page-body li{
+        display: inline-table;
+        margin-top: 4px;
+    }
+</style>
+
+<% for user in  @pages %>
+<div  class="qf b aml" style="height:auto;width:95%;position: relative;top:1px;border-radius: 4px;left: 3%">
+  <div class="index-user-list-body">
+    <%if current_user %>
+        <% unless Branch.friendship_exists?(current_user, user )%>
+            <%= link_to '<i class="glyphicon glyphicon-pushpin"></i>&nbspBranch in'.html_safe, branches_path(:user_id => @users, :page_id => user.id), :class=>"btn btn-primary btn-sm",:style => " text-decoration:none ;width: 100%",:method => :post %>
+           <% else %>
+            <%= link_to "Branched "'<i class="glyphicon glyphicon-tree-deciduous"></i>'.html_safe, user, :class=>"btn btn-success btn-sm",:style=>"width: 100%" %>
+        <% end %>
+    <% end %>
+  </div>
+  <div class="index-user-list-left">
+    <div class="index-list-left-sub">
+      <% if user.image.present? %>
+        <%= link_to image_tag(user.image_url.to_s, :width=>"50px;",:height=>"50px;", :style => " float:left;left;margin-right: 4px;:height:50px;",:class=>"img-circle"),user%>
+      <% else %>
+          <%= link_to image_tag("TREEEEEE.jpg", :width=>"50px;",:height=>"50px;", :style => " float:left;left;margin-right: 4px;:height:50px;",:class=>"img-circle"),user%>
+      <% end %>
+    </div>
+    <div class="index-list-left-sub1">
+      <div style="text-align: right;height: 23px">
+        <p><span style="font-size:1.0em;margin-right: 5px" class="glyphicon glyphicon-leaf"><%= user.branches.count %></span><span style="font-size:1.0em;" class="glyphicon glyphicon-eye-open"><%= user.views %></span>
+          <b style="color: green;font-size: large;"><%=link_to user.name, user %></b><br>
+          <%=link_to user.user.name, user.user %>
+      </div>
+      <ul class="list-tree-branch" style="width:86%">
+        <% if user.body.present? %>
+          <li> <%= user.body %></li>
+            <% else %>
+            <li> Let see what <%= user.name %> have for us</li>
+            <% end %>
+      </ul>
+
+        <div style="height: 1px"></div>
+        </div>
+
+
+  </div>
+</div>
+<% end %>
+

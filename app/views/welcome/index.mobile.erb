@@ -1,0 +1,187 @@
+<style type="text/css">
+  .sign-in{
+      width: 105%;
+      background: #fff;
+      padding: 10.7px;
+      text-align: center;
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+      font-family: 'Open Sans Light', sans-serif;
+      position: relative;
+      right: 2%;
+      padding-top: 2%;
+      margin-bottom: 3%
+  }
+  .normal-body{
+      width: 105%;
+      background: #fff;
+      padding: 0.7px;
+      padding-top: 4px;
+      text-align: center;
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+      font-family: 'Open Sans Light', sans-serif;
+      margin-bottom: 2%;
+      position: relative;
+      right: 2%;
+  }
+  .normal-g{
+      width: 105%;
+      height: auto;
+      padding: 0.7px;
+      padding-top: 4px;
+      text-align: center;
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+      font-family: 'Open Sans Light', sans-serif;
+      margin-bottom: 2%;
+      position: relative;
+      right: 2%;
+  }
+  .normal-index{
+      width:20%;
+      height: 20px;
+      float: right;
+      text-align:center;
+      font-size: inherit;
+  }
+  .normal-index1{
+      width:200px;
+      height: 50px;
+      text-align: left;
+      padding-left: 2%;
+  }
+  .normal-index-sub{
+      width: 100%;
+      height: auto;
+      text-align: center;
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+      font-family: 'Open Sans Light', sans-serif;
+      margin-bottom: 2%;
+      border: solid  #2a88bd 1px ;
+      padding: 2%;
+
+  }
+  .comment-body{
+      width: 100%;
+      height: auto;
+      padding: 0.7px;
+      padding-top: 4px;
+      text-align: left;
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+      font-family: 'Open Sans Light', sans-serif;
+      margin-bottom: 2%;
+
+  }
+  .font-body{
+      font-family: 'Open Sans Light', sans-serif;
+      color: #2a88bd;
+      padding: 2%;
+      font-size: 85%;
+
+  }
+
+</style>
+
+
+<div class="sign-in">
+  <div class="sign-up-sub">
+    <a href="/passbys/show" style="width:40%; " class="btn btn-success" data-iconpos="top" />Sign up</a><a href="/passbys/new" data-transition="slide" class="btn btn-primary" style="width:40%;margin-left:5%"><b>Sign in</b></a>
+  </div>
+</div>
+
+<% @articles.each do |article| %>
+<div class="normal-g">
+  <div class="normal-index">
+    <% if current_user %>
+        <% if current_user.id   ==   article.user.id  %>
+            <a href="#" data-toggle="modal" data-target="#modal-<%= article.id %>"><b class="glyphicon glyphicon-chevron-down" style="font-size: 100%"></b></a>
+        <% end %>
+    <% end %>
+  </div>
+  <div class="normal-index1">
+    <div>
+      <% if article.user.image.present? %>
+          <%=link_to image_tag(article.user.image,:class=>"mobile-article-image"), article.user %>
+      <% else %>
+          <%=link_to image_tag("tree.png",:width=>"46px;",:height=>"55px;",:class=>"img-thumbnail"), article.user %>
+      <% end %>
+    </div>
+    <p style="position: relative;bottom: 40px;left: 50px;font-size: 80%"><b><%= article.user.name %></b>
+      <br>
+      <%= time_ago_in_words(article.created_at) %>
+    </p>
+  </div>
+  <% if article.image.present? %>
+      <div class="normal-index-sub">
+        <%= image_tag(article.image_url.to_s,:width=>"100%;",:height=>"170px",:class=>"img-thumbnail")  %>
+      </div>
+  <% else %>
+  <% end %>
+  <div class="font-body">
+
+    <%= link_to truncate(article.body, :length => 100), article %>
+
+  </div>
+  <div class="comment-body"><b> From </b>  <%=link_to article.page.name, article.page %>Comments:<%= article.comments.count %> Views:<%= article.views%></div>
+  <% if current_user%>
+      <%= form_for([article, article.comments.new]) do |f| %>
+
+          <ul>
+            <% article.errors.full_messages.each do |msg| %>
+                <li style="color: #0d0d0d;text-align: center"><%= msg %></li>
+            <% end %>
+          </ul>
+
+
+
+          <%= f.hidden_field :user_id, :class => 'form-control', :value => current_user.id if current_user %>
+
+
+
+          <div class="control-group">
+            <%= f.text_area :body, :class => 'form-control', :placeholder=>"Enter Comment" ,:style=>"width:98%;  height: 40px;" %>
+          </div>
+
+          <table style="position: relative;right: 5%;width: 100%">
+            <tr>
+              <td>
+                <% if current_user.image.present? %>
+                    <%= image_tag(current_user.image,:width=>"50px;",:height=>"55px;",:class=>"img-thumbnail")  %>
+                <% else %>
+                    <%= image_tag("tree.png",:width=>"50px;",:height=>"55px;",:class=>"img-thumbnail")  %>
+                <% end %>
+              </td>
+              <td >   <%= f.submit "comment", :class => 'btn btn-success', :style=>"width:100% ;" %> </td>
+            </tr>
+          </table>
+      <%end%>
+  <% end %>
+</div>
+
+<% if current_user %>
+    <div id="modal-<%= article.id %>" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Option</h4>
+          </div>
+          <div class="modal-body">
+            <ul class="sidebar-nav">
+              <li >
+                <a  data-icon="arrow-l" <%= link_to '<i class="glyphicon glyphicon-pencil" style="font-size:1.4em"></i>&nbspEdit'.html_safe, edit_article_path(article) %></a>
+              </li>
+              <li>
+                <a  data-icon="arrow-l" <%= link_to '<i class="glyphicon glyphicon-trash"></i>&nbspDelete '.html_safe,  delete_article_path(article), method: :delete, data: { confirm: 'Are you sure?' },:style=>"color:red" %> </a>
+              </li>
+            </ul>
+            <div style="height: 20px"></div>
+            <br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<% end %>
+<% end %>
+<%= will_paginate @articles %>

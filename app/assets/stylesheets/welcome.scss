@@ -1,0 +1,79 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.right-ban{
+  width: 40%;
+  height: 250px;
+  float: right;
+  position: relative;
+  left: 320px;
+  bottom: 330px;
+
+}
+.ban-inner{
+  width: 100%;
+  height: 300px;
+  position: relative;
+  top: 10px;
+  right: 5%;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+}
+.welcome-index-body1{
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  margin-bottom: 5%;
+  height: 40px;
+  width: 75%;
+  position: relative;
+}
+.welcome-index-sub{
+  height: 209px;
+  width: 100%;
+  position: relative;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+  margin-bottom: 5%;
+}
+.welcome-index-sub3{
+  height: 359px;
+  width: 100%;
+  position: relative;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+  margin-bottom: 5%;
+}
+.welcome-index-sub4{
+  height: 440px;
+  width: 100%;
+  position: relative;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+  margin-bottom: 5%;
+}
+.welcome-index-sub2{
+  height: 447px;
+  position: relative;
+  bottom: 20px;
+}
+.welcome-index-sub1{
+  height:300px;
+  width: 100%;
+  position: relative;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+  margin-bottom: 5%;
+  top: 0px;
+}

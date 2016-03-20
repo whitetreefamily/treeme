@@ -1,0 +1,48 @@
+
+<style type="text/css">
+ .reset-password{
+     width: 105%;
+      background: #fff;
+     padding: 0.7px;
+     padding-top: 4px;
+     text-align: center;
+     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+     font-family: 'Open Sans Light', sans-serif;
+     margin-bottom: 10%;
+     margin-top: 20%;
+     position: relative;
+     right: 2%;
+     color: forestgreen;
+
+ }
+ .reset-password-sub{
+     width: 105%;
+     background: #fff;
+     padding: 0.7px;
+     padding-top: 4px;
+     text-align: center;
+     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+     font-family: 'Open Sans Light', sans-serif;
+     margin-top: 20%;
+     position: relative;
+     right: 2%;
+     color: forestgreen;
+ }
+</style>
+<div class="reset-password">
+    <b>Find your Slatree account</b><br>
+          Enter your email
+</div>
+<%= form_tag password_resets_path,  :method => :post do %>
+    <div class="field">
+      <%= text_field_tag :email, params[:email] , :class => 'form-control',:placeholder =>"Your email", :label =>"Your email"%>
+    </div>
+    <br>
+    <div class="actions"><%= submit_tag "Reset Password", :class => 'btn btn-success',:style=>"width:100%" %></div>
+<% end %>
+
+<div class="reset-password-sub">
+  Or type in your username and we’ll do our best to help:
+  send to Slatree email
+</div>
+<div style="height: 185px"> </div>

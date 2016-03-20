@@ -1,0 +1,43 @@
+<%= form_for(@contestant) do |f| %>
+    <% if @contestant.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@contestant.errors.count, "error") %> prohibited this contestant from being saved:</h2>
+
+          <ul>
+            <% @contestant.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="field">
+      <%= f.text_field :title, :class => 'form-control',  :placeholder=>" Enter  Title" %>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.hidden_field :user_id,  :class => 'form-control', :value => current_user.id if current_user%>
+      </div>
+      <%= error_span(@contestant[:user_id]) %>
+    </div>
+    <div class="control-group">
+
+      <div class="controls">
+        <%= f.text_field :name , :class => 'form-control', :placeholder=>" Enter  Contestant Name" %>
+      </div>
+      <%= error_span(@contestant[:name ]) %>
+    </div>
+    <div class="control-group">
+      <b>Contestant image && <---- image only ----> </b>
+      <div class="controls">
+        <%= f.file_field :image, :class => 'form-control'  %>
+      </div>
+      <%= error_span(@contestant[:image]) %>
+    </div>
+
+    <div class="field">
+      <%= f.hidden_field :vote_page_id  %>
+    </div>
+
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+<% end %>

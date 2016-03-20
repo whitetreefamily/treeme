@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+
+  <%= stylesheet_link_tag "/statree/css/bootstrap.css", "/statree/css/bootstrap.min.css","/statree/css/simple-sidebar.css","/statree/css/statree.css" %>
+  <%= javascript_include_tag  "/statree/js/bootstrap.js","/javascripts/rails.validations.js", "/statree/js/statree.js", "/statree/js/articles.js","/statree/js/bootstrap.min.js","/statree/js/jquery.js","/statree/js/drowup.js"%>
+
+
+  <%= yield(:head) %>
+
+</head>
+<body>
+  <style>
+      body{
+          background:url("WT%20NEW%203.jpg");
+
+      }
+  </style>
+
+
+
+
+
+
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+          <% if current_user %>
+          <% if current_user.image.present? %>
+              <%= image_tag(current_user.image_url.to_s, :width=>"46px;",:height=>"55px;",:class=>"mobile-image")  %><b style="margin-left: 10px;color: #fff"><%= current_user.name  %></b>
+        <% else %>
+              <%= image_tag("tree.png",:width=>"46px;",:height=>"55px;",:class=>"img-thumbnail")  %><b style="margin-left: 10px;color: #fff"><%= current_user.name  %></b>
+          <% end %>
+         <% else %>
+              <b style="font-size: 150%; color:#fff">Slatree</b>
+        <% end %>
+        </li>
+            <% @user = current_user if current_user %>
+        <% if current_user %>
+        <li>
+          <a  data-icon="arrow-l" <%= link_to '<i class="glyphicon glyphicon-user" style="font-size:1.4em"></i>&nbspHome'.html_safe, current_user%>
+        </li>
+        <li>
+          <a  data-icon="arrow-l" <%= link_to '<i class="glyphicon glyphicon-cog" style="font-size:1.4em"></i>&nbspSetting'.html_safe, edit_user_path(@user) %></a>
+        </li>
+        <li>
+          <a  data-icon="arrow-l" <%= link_to '<i class="glyphicon glyphicon-tower" style="font-size:1.4em"></i>&nbspPeople'.html_safe, users_path%></a>
+        </li>
+            <hr>
+        <% end %>
+        <% unless current_user %>
+          <li>
+            <a href="/">Home<span style="font-size:1.4em;" class="glyphicon glyphicon-home"></span></a>
+          </li>
+          <li>
+            <a href="/passbys/new">Sign in<span style="font-size:1.4em;" class="glyphicon glyphicon-log-in"></span></a>
+          </li>
+          <li>
+            <a href="/passbys/show">Sign up<span style="font-size:1.4em;" class="glyphicon glyphicon-new-window"></span></a>
+          </li>
+          <% end %>
+          <li>
+            <a href="/welcome/tour">Help</a>
+          </li>
+          <li>
+            <a href="/welcome/meta">About</a>
+          </li>
+        <li>
+          <hr>
+          <% if current_user %>
+              <a  data-icon="arrow-l" <%= link_to '<i class="glyphicon glyphicon-log-out" style="font-size:1.4em"></i>&nbspLog out'.html_safe, log_out_path%> </a>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="nava-body">
+               <ul class="mobile-list">
+
+                 <% if current_user %>
+                    <li> <a href="#menu-toggle" class="btn btn-success" id="menu-toggle"><i><span style="font-size:1.4em;" class="glyphicon glyphicon-align-justify"></span></i></a></li>
+                  <% else %>
+                     <li> <a href="#menu-toggle" class="btn btn-success" id="menu-toggle"><i><span style="font-size:1.4em;" class="glyphicon glyphicon-align-justify"></span></i></a></li>
+                 <% end %>
+                     <li><a href="/pages"><button type="button" class="btn btn-success"><i><span style="font-size:1.4em;" class="glyphicon glyphicon-tree-deciduous"></span></i></button></a></li>
+                 <% if current_user %>
+                   <li><a href="/articles"><button type="button" class="btn btn-success"><i><span style="font-size:1.4em;" class="glyphicon glyphicon-list-alt"></span></i></button></a></li>
+                   <% else %>
+                     <li><a href="/"><button type="button" class="btn btn-success"><i><span style="font-size:1.4em;" class="glyphicon glyphicon-home"></span></i></button></a></li>
+
+                  <% end %>
+                 <% unless current_user %>
+                 <li> <a href="/passbys/new" class="btn btn-success" ><i><span style="font-size:1.4em;" class="glyphicon glyphicon-log-in"></span></i></a></li>
+                 <%end%>
+                 <li style="margin-bottom: 70px;margin-left: 5px;font-size: 120%;float: left" > <%=link_to image_tag("slate4434 copy.png",:class => "mobile-link",:height=>"60px;", :style => " :height:50px;")%></li>
+               </ul>
+            </div>
+
+
+           <div class="full-mobile-body">
+             <% unless flash.empty? %>
+                 <div class="info">
+                   <%- flash.each do |name, msg| -%>
+
+                       <%= content_tag :div, msg, :id => "flash_#{name}" ,:class=>"natice-body" %>
+
+                   <%- end -%>
+                 </div>
+             <% end %>
+
+                <%= yield %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- jQuery -->
+  <script src="js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+      $("#menu-toggle").click(function(e) {
+          e.preventDefault();
+          $("#wrapper").toggleClass("toggled");
+      });
+      $(".judge").click(function(e) {
+          e.preventDefault();
+          $("#wrapper").toggleClass("toggled");
+      });
+  </script>
+
+
+
+
+</body>
+</html>

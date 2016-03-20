@@ -1,0 +1,63 @@
+<div class="index-user-all">
+  <div class="index-body-input">
+    <div class="index-list-body">
+      <h3></br><b>Slatree </b></h3>
+
+    </div>
+
+
+  </div>
+
+  <div id="products">
+    <div  class="qf b aml" style="height: auto">
+      <hr>
+
+      <h1>Reset Password</h1>
+
+      <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+          <% if @user.errors.any? %>
+              <div class="error_messages">
+                <h2>Form is invalid</h2>
+                <ul>
+                  <% for message in @user.errors.full_messages %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+          <div class="field">
+            <%= f.label :password %>
+            <%= f.password_field :password,:class => 'form-control',:placeholder =>"password", :label =>"Your email"  %>
+          </div>
+          <div class="field">
+            <%= f.label :password_confirmation%>
+            <%= f.password_field :password_confirmation,:class => 'form-control',:placeholder =>"password_confirmation", :label =>"Your email"  %>
+          </div>
+          <div class="actions"><%= f.submit "Update Password",:class => 'btn btn-success' %></div>
+      <% end %>
+
+
+    </div>
+
+    <div  class="qf b aml" style="height: auto">
+      <a href="//Stetree@gmail.com">Stetree@gmail.com</a>
+    </div>
+
+  </div>
+
+  <div style="height: 80px"></div>
+
+</div>
+
+
+
+<div class="index-list-body1">
+  <%= render "pages/caro" %>
+
+
+  <div>
+
+  </div>
+
+</div>
+

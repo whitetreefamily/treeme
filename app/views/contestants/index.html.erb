@@ -1,0 +1,12 @@
+<% @contestants.each do |contestant| %>
+    <div class="contestant-show">
+      <%= image_tag "topbanner.png",:style=>"height:30%; width:17%; position:absolute;bottom:72%;left:85%" %>
+      <%=image_tag contestant.image_url.to_s, :style => "width:100%;height:100%;margin-bottom: 2%;"%><br>
+      <button type="button" class="btn btn-default"> <%= pluralize contestant.votes, "vote" %></button>|
+      <% if current_user && current_user.can_vote_for?(contestant) %>
+      <%= link_to "Vote", vote_contestant_path(contestant, value: 1), method: "post", :class=>"btn btn-success" %>
+          <% end %>
+    </div>
+<% end %>
+
+

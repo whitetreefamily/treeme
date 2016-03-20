@@ -1,0 +1,61 @@
+<div class="ban-inner">
+  <div class="welcome-index-body1" style="width:100%">
+    <h1><b style="position: relative;left:10px;color: forestgreen">Welcome Slatree</b>  </h1>
+  </div>
+  <div id="myCarousel" class="carousel slide" style="position: relative;bottom: 10%">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner"  style="height:200%">
+      <div class="item active">
+        <%=image_tag "slla copy.jpg",  :alt=>"First slide", :style => "height:450px;width:100%"%>
+        <div class="container">
+          <div class="carousel-caption" style="color: #255BAB">
+            <h1 style="color: forestgreen
+            ">Sign up SLATREE for free!!</h1>
+          </div>
+        </div>
+      </div>
+      <div class="item" style="color: #255BAB">
+        <%=image_tag "zhuatu_com_fx2.jpg",  :alt=>"First slide", :style => "height:450px;width:100%"%>
+        <div class="container">
+          <div class="carousel-caption">
+            <h3 style="color: forestgreen">Join friends to SLATE for free, build your own TREES and enjoy loads of fun!!</h3>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <%=image_tag "slatetree.jpg",  :alt=>"First slide", :style => "height:450px;width:100%"%>
+        <div class="container">
+          <div class="carousel-caption">
+            <h1 style="color: forestgreen">Grow your social tree of fun!!.</h1>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="left carousel-control" href="index.html#myCarousel" data-slide="prev"> <span class="icon-prev"></span></a>
+    <a class="right carousel-control" href="index.html#myCarousel" data-slide="next">  <span class="icon-next"></span></a>
+  </div><!-- /.carousel -->
+
+
+  <!-- Carousel
+  ================================================== -->
+
+</div>
+
+<div class="right-ban">
+  <div class="welcome-index-body">
+    <div class="welcome-index-sub">
+      <%=render "passbys/welcome_by" %>
+    </div>
+
+    <div class="welcome-index-sub1">
+      <%=render "users/user_page" %>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,53 @@
+<div class="index-user-all">
+  <div class="index-body-input">
+    <div class="index-list-body">
+      <h3> <b>Slatree </b></h3>
+     Recover your Slatree account
+    </div>
+
+
+  </div>
+
+  <div id="products">
+    <div  class="qf b aml" style="height: auto">
+
+      <hr>
+
+      <h1>Reset Password</h1>
+
+      <%= form_tag password_resets_path,  :method => :post do %>
+          <div class="field">
+            <%= text_field_tag :email, params[:email] , :class => 'form-control',:placeholder =>"Your email", :label =>"Your email"%>
+          </div>
+          <div class="actions"><%= submit_tag "Reset Password", :class => 'btn btn-success' %></div>
+      <% end %>
+
+    </div>
+
+    <div  class="qf b aml" style="height: auto">
+      <a href="//Slatree@gmail.com">Contact us via: E-mail:Slatree@gmail.com,   Mobile: +2349026931738,+2348100898548,+2347066585505</a>
+    </div>
+
+  </div>
+
+  <div style="height: 80px"></div>
+
+</div>
+
+
+
+<div class="index-list-body1">
+  <%= render "pages/caro" %>
+
+
+  <div>
+
+  </div>
+
+</div>
+
+
+
+
+
+

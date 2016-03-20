@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title><%= h(yield(:title) || "Untitled") %></title>
+  <%= stylesheet_link_tag "/mobile/jquery.mobile-1.0b3.min.css", "/mobile/f.css", "/mobile/custom" %>
+  <%= javascript_include_tag  "/mobile/jquery-1.6.4.min.js", "/mobile/jquery.mobile-1.0b3.min.js" %>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <%= yield(:head) %>
+  <script type="text/javascript">
+      $(document).bind("mobileinit", function() {
+          $.mobile.page.prototype.options.addBackBtn = true;
+      });
+  </script>
+</head>
+<body>
+<div data-role="page" id="page" data-theme="f" data-add-back-btn="true" >
+  <div data-role="header" data-theme="f" data-add-back-btn="true">
+    <h1>Sound of naija</h1>
+  </div>
+
+
+  <div data-role="content">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="/songs" data-icon="music">Music</a></li>
+        <li><a href="/beats" data-icon="star">Beat</a></li>
+        <li><a href="/articles" data-icon="star">Blog</a></li>
+        <li><a href="/forum" data-icon="star">Forum</a></li>
+      </ul>
+    </div>
+    <br>
+    <%= yield %>
+  </div>
+  <div data-role="footer" data-theme="f" >
+    <h4>Sound of naija &copy; 2013</h4>
+    <%= link_to "Full Site", root_url(:mobile => 0), :class => "ui-mobile", :rel => "external" %>
+  </div>
+</div>
+</body>
+</html>

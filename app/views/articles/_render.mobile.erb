@@ -1,0 +1,57 @@
+
+
+<%= bootstrap_form_for(@article) do |f| %>
+    <% if @article.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+          <div class="panel-body" style="text-align: center">
+            <ul>
+              <% @branch.errors.full_messages.each do |msg| %>
+                  <li style="color: #0d0d0d;text-align: center"><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+    <% end %>
+
+
+    <div class="news-bodyfield">
+
+
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.text_area :body, :class => 'form-control', :placeholder =>"Enter text" %>
+        </div>
+        <%= error_span(@article[:body]) %>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.collection_select :category_id, Category.all, :id, :name %>
+        </div>
+      </div>
+
+
+      <%= f.hidden_field :user_id, :class => 'form-control', :value=> current_user.id if current_user%>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.file_field :image, :class => 'form-control' %>
+        </div>
+        <%= error_span(@article[:image]) %>
+      </div>
+
+
+
+      <%= f.hidden_field :page_id  %>
+
+
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+
+
+    </div>
+<% end %>
+
+

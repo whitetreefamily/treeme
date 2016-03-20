@@ -1,0 +1,41 @@
+<div class="index-user-all">
+  <div class="index-body-input">
+    <div class="index-list-body">
+      <h3> <b>See People </b></h3>
+       more people from the suggestions below
+    </div>
+    <div  class="qf b aml" style="height: 50px">
+      <%= form_tag users_path, :class=>"navbar-search pull-left", :method => :get do %>
+          <div class="input-group">
+        <span class="input-group-btn">
+           <%= submit_tag "Search Name!", :name=> nil,:class=>"btn btn-success" %>
+        </span>
+            <%= text_field_tag :search, params[:search], :class=>"form-control", :placeholder=> "Enter , Name",:style=>"width:400px" %>
+      <% end %>
+      </div><!-- /input-group -->
+     </div>
+    </div>
+
+  <div id="products">
+    <%= render @users %>
+
+  </div>
+
+  <%= will_paginate %>
+</div>
+
+
+
+<div class="index-list-body1">
+  <%= render "pages/caro" %>
+
+
+  <div>
+
+  </div>
+
+</div>
+
+
+
+

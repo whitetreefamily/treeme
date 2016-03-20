@@ -1,0 +1,123 @@
+<div style="height: 30px"></div>
+<div class="row">
+  <div class="col-md-9 col-md-push-3">
+    <div class="article-show" >
+      <div class="user-show-post1" style="text-align: center;margin-bottom: 5px;position: relative;bottom: 2px;">
+        <% if @article.user.image.present? %>
+        <%=link_to image_tag(@article.user.image_url.to_s, :class=>"img-circle", :width=>"50px;",:height=>"50px;", :style => " float:left;left;margin-right: 4px;:height:50px;"), @article.user%>
+        <% else %>
+            <%=link_to image_tag("tree.png", :class=>"img-circle", :width=>"50px;",:height=>"50px;", :style => " float:left;left;margin-right: 4px;:height:50px;"), @article.user%>
+        <% end %>
+        <p style="float: left;margin-right: 4px"><b><%=  @article.user.name %></b></p>   <p style="float: right;margin-right: 4px"><%= time_ago_in_words(@article.created_at) %></p>
+        <div class="media-body">
+            <%if @article.user.categories.present?  %>relative_time
+                <b> interested in:</b>
+                <% @article.user.categories.all.each do |category| %>
+                   <%=link_to   category.name , category %>,
+                <% end %>
+            <% else %>
+                <b> Interests:</b> No interest yet
+            <% end %>
+              <br>
+            Posted <%= time_ago_in_words(@article.created_at) %>,  <i class="glyphicon glyphicon-eye-open"></i><%= @article.views%>
+          <% if current_user %>
+              <% if current_user.id   ==   @article.user.id  %>
+            ( <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>)
+             <% end %>
+           <% end %>
+          </p>
+          <ul class="dropdown-menu" style="padding: -3px">
+            <li style="text-align: center">
+              <a href="#" data-toggle="modal" data-target="#modal-<%= @article.id %>"><b style="color: #0074d9"> Edit </b></a>
+              <p style="font-size: 12px"> <%= link_to '<i class="glyphicon glyphicon-trash"></i>&nbspDelete '.html_safe, @article, method: :delete, data: { confirm: 'Are you sure?' },:style=>"color:red" %> </p>
+            </li>
+          </ul>
+        </div>
+        <div style="height: 5px"></div>
+      </div>
+      <% if @article.image.present? %>
+      <%=image_tag @article.image_url.to_s, :width=>"95%;",:height=>"200px;", :style =>" margin-bottom: 14px;"%>
+          <% else%>
+      <% end %>
+
+    </div>
+    <div class="qf b aml" style="height: auto;width: 89%;border-radius: 0px 0px 10px 10px" >
+      <p style="color: #59595a;">
+        <%= @article.body  %>
+      <div id="modal-<%=@article.id %>" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel"><%=@article.title %></h4>
+            </div>
+            <div class="modal-body">
+              <%= bootstrap_form_for @article, method: :put do |f|%>
+                  <%= render(:partial => "articles/inline", :locals => {:f => f}) %>
+              <%end%>
+            </div>
+          </div>
+        </div>
+      </div>
+      </p>
+      <b> From </b>  <%=link_to @article.page.name, @article.page %> <%= @article.comments.count %>Comments  <span class="glyphicon glyphicon-eye-open"></span><%= @article.views%>
+         <div style="text-align: right">
+           <% if current_user   %>
+               <div class="natice-body" style="width:20%">
+                  <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-xs"><span style="font-size:1.2em;" class="glyphicon glyphicon-comment"></span> Comment </a>
+               </div>
+           <% else %>
+               <div class="natice-body" style="width:30%">
+               <a href="/" class="btn btn-success btn-xs" ><span style="font-size:1.2em;" class="glyphicon glyphicon-user"></span> Sign in For Reply </a>
+               </div>
+               <% end %>
+         </div>
+      </div>
+     <br>
+
+    <div>
+      <%=render @article.comments %>
+
+    </div>
+
+
+
+
+
+
+  </div>
+  <div class="col-md-3 col-md-pull-9">
+    <div  class="normal-body" style="margin-bottom: 6%;">New Branches</div>
+    <% for friendship in @pages %>
+        <div class="row" style="margin-bottom: 4%;position: relative;left: 5%;" >
+          <div class="natice-body" style="width: 90%">
+            <div class="col-xs-6" style="position: relative;right: 9%">
+              <% if friendship.image.present?   %>
+                <%= link_to image_tag(friendship.image_url.to_s, :class=>"img-circle", :width=>"45px;",:height=>"25px;", ), friendship%>
+              <% else %>
+                  <%= link_to image_tag("TREEEEEE.jpg", :class=>"img-circle", :width=>"45px;",:height=>"25px;", ), friendship%>
+              <% end %>
+                  </div>
+            <div class="col-xs-6"style="position: relative;right: 10%"><%= link_to "More Info"'<i class="glyphicon glyphicon-eye-open"></i>'.html_safe, friendship, :class=>"btn btn-info btn-xs",:style => " text-decoration:none;color:#000" %></div>
+            <div style="height: 30px"></div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+<% if current_user   %>
+<!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h4 class="modal-title">Comment</h4>
+          </div>
+          <div class="modal-body">
+            <%=render "comments/new" %>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<% end %>

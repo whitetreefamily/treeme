@@ -1,0 +1,46 @@
+<style>
+  .box-page-body li{
+      display: inline-table;
+      margin-top: 4px;
+  }
+</style>
+
+
+
+<div  class="qf b aml" style="height:auto;width:95%;position: relative;top:1px;border-radius: 4px;left: 3%">
+  <div class="index-user-list-body">
+   <%= link_to"View", user, :class=>"btn btn-success",:style=>"width: 100%" %>
+  </div>
+  <div class="index-user-list-left">
+    <div class="index-list-left-sub">
+      <% if user.image.present? %>
+             <%=link_to image_tag(user.image_url.to_s, :width=>"50px;",:height=>"50px;", :style => " float:left;left;margin-right: 4px;:height:50px;",:class=>"img-circle"),user%>
+         <%else%>
+          <%=link_to image_tag("tree.png", :width=>"50px;",:height=>"50px;", :style => " float:left;left;margin-right: 4px;:height:50px;",:class=>"img-circle"),user%>
+      <%end%>
+    </div>
+    <div class="index-list-left-sub1">
+      <div style="text-align: right;height: 23px">
+        <p><b style="color: green;font-size: large;"><%= link_to user.name, user%></b><%= link_to user.email, user%>
+      </div>
+      <ul class="list-tree-branch">
+        <% if user.pages.present? %>
+        <b>Owner of tree</b>:
+            <% for friendship in user.blog %>
+                <li ><%= link_to friendship.name, friendship%>, </li>
+        <% end %>
+            <% else %>
+            <b>Bio</b>:
+            <% if user.bio.present? %>
+                <li><%= user.bio %> </li>
+              <%else%>
+                No Biography yet
+            <% end %>
+      </ul>
+       <% end %>
+      <div style="height: 1px"></div>
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<%if @user.categories.present? %>
+        <% @user.categories.all.each do |category| %>
+              <%  category.articles.each do |article| %>
+
+            <div class="article-index" style=" height: auto;margin-bottom: 2%;position: relative;left: 5%">
+              <% if article.user.image.present? %>
+                  <%=link_to image_tag(article.user.image_url.to_s, :class=>"img-circle", :width=>"50px;",:height=>"50px;", :style => " float:left;left;margin-right: 4px;:height:50px;"), article.user%>
+              <% else %>
+                  <%=link_to image_tag("tree.png", :width=>"50px;",:height=>"50px;", :style => " float:left;left;margin-right: 4px;:height:50px;",:class=>"img-circle"), article.user %>
+              <% end %>
+              <b style="float: left;margin-right: 4px"> <%=article.user.name %></b><p style="float: right;margin-right: 4px"><%= article.created_at.strftime("%B %e, %Y") %></p>
+              <div style="margin-top: 1px;text-align: center;width: 90%">
+                <h5 > <b><%= link_to article.title, article %></b></h5>
+              </div>
+              <% if article.image.present? %>
+                  <%=image_tag article.image_url.to_s, :class=>"article-image", :width=>"50%;",:height=>"180px;",:style =>" margin-bottom: 14px;"%>
+              <% else %>
+              <% end %>
+              <p style="color: #59595a;">
+                <%= raw summarize(article.body, 290) %>  <%=link_to "read more" ,article ,:class=>"btn btn-success btn-xs"%>
+              </p>
+              <% if current_user %>
+                  <% if current_user.id   ==   article.user.id  %>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+                      <ul class="dropdown-menu" style="padding: -3px">
+                        <li style="text-align: center">
+                          <b style="color: #0074d9"> Tour </b><br>
+                          <%= bootstrap_form_for article, method: :put do |f|%>
+                              <div class="normal-body">
+                                <%= render(:partial => "articles/inline", :locals => {:f => f}) %>
+                              </div>
+                              <p style="font-size: 12px"> <%= link_to '<i class="glyphicon glyphicon-trash"></i>&nbspDelete '.html_safe, article, method: :delete, data: { confirm: 'Are you sure?' },:style=>"color:red" %> </p>
+                              </li>
+                              </ul>
+                          <% end %>
+                  <% end %>
+                  <b> From </b>  <%=link_to article.page.name, article.page %> <%= article.comments.count %>Comments  <span class="glyphicon glyphicon-eye-open"></span><%= article.views%>
+
+              <%end%>
+
+            </div>
+
+
+        <% end %>
+        <% end %>
+
+ <% end %>
+

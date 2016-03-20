@@ -1,0 +1,59 @@
+
+
+  <div class="normal-body">
+    <table style="width:100%">
+      <tr>
+        <td><a href="/categories/News" class="btn btn-success btn-xs" >News</a></td>
+        <td><a href="/categories/Fashion" class="btn btn-success btn-xs">Fashion</a></td>
+        <td><a  href="/categories/Music" class="btn btn-success btn-xs">Music</a></td>
+        <td><a href="/categories/Thread" class="btn btn-success btn-xs">Thread</a></td>
+        <td><a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs btn-lg">More</a></td>
+      </tr>
+    </table>
+          <div style="text-align: center"><b>Welcome To State tree Forest</b></div>
+    </div>
+
+<div id="posts">
+
+  <%= render @articles %>
+</div>
+
+
+<%= will_paginate @articles %>
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Categories</h4>
+      </div>
+      <div class="modal-body">
+        <a href="/categories/Business" data-transition="slide" class="btn btn-success btn-sm" style="width: 100%;margin-bottom: 1%">Business</a>
+        <a href="/categories/Relationship" data-transition="slide" class="btn btn-success btn-sm" style="width: 100%;margin-bottom: 1%">Relationship</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+    $(document).ready(function() {
+        if ($('.pagination').length) {
+            $(window).scroll(function() {
+                var url = $('.pagination .next_page').attr('href');
+                if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 20) {
+                    $('.pagination').text("Please Wait...");
+                    return $.getScript(url);
+                }
+            });
+            return $(window).scroll();
+        }
+    });
+
+</script>

@@ -1,0 +1,78 @@
+<script type="text/javascript">
+    $('input[id=lefile]').change(function() {
+        $('#photoCover').val($(this).val());
+    });
+
+
+</script>
+<% @user = User.find(params[:id]) %>
+<%= bootstrap_form_for(@user) do |f| %>
+
+    <% if @user.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+    <% end %>
+    <div style="text-align: center">
+      <div class="control-group">
+        <div class="controls">
+          <%= f.hidden_field :name, :class => 'form-control',:value=> current_user.name  if current_user %>
+        </div>
+        <br>
+
+
+
+        <input id="lefile" type="file" style="display:none">
+        <div class="input-append">
+          <%= f.hidden_field :image, :id=>"photoCover", :class=>"input-large" %>
+          <a class="btn" onclick="$('input[id=lefile]').click();">Browse</a>
+        </div>
+
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+          <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+          <div>
+            <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+          </div>
+        </div>
+      </div><br>
+
+
+
+
+      <%= f.hidden_field :email, :class => 'form-control',:value => current_user.email if current_user %>
+
+
+
+      <%= f.hidden_field :password_hash, :class => 'form-control' %>
+
+
+
+      <br>
+
+    </div>
+    <div class="modal-footer">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+    </div>
+<% end %>
+
+
+
+<%= bootstrap_form_for @user, url: change_password_path do |p| %>
+    <%= p.password_field :current_password, hide_label: true, placeholder: "Enter your Old Password", class: "input-lg required" %>
+    <%= p.password_field :password, hide_label: true, placeholder: "Enter a New Password", class: "input-lg required" %>
+    <%= p.password_field :password_confirmation, hide_label: true, placeholder: "Confirm New Password", class: "input-lg required"%>
+
+    <%= p.submit "Change Password", :class=> "btn btn-primary" %>
+<% end %>

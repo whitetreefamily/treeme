@@ -1,0 +1,39 @@
+<div class="index-list-body1-sub" >
+  <h4><b>Trends</b></h4>
+</div>
+<div class="col-md-8" >
+  <div id="myCarousel" class="carousel slide" style="width:260px">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="item active">
+        <% @page  =  Page.find(11) %>
+        <%=link_to image_tag(@page.image_url.to_s,  :alt=>"First slide", :style => "height:160px;width:100%"),@page%>
+        <div class="container">
+          <div class="carousel-caption" >
+            <h4 style="color: #fff"><%=link_to @page.name, @page %></h4>
+          </div>
+        </div>
+      </div>
+      <% Page.where("views >= 50").take(10).each do |c| %>
+          <div class="item"> <%= link_to image_tag(c.image_url.to_s,  :alt=>"First slide", :style => "height:160px;width:100%"),c %>
+            <div class="container">
+              <div class="carousel-caption" style="color: #255BAB">
+                <h4 style="color: #fff"><%=link_to c.name, c %></h4>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <a class="left carousel-control" href="index.html#myCarousel" data-slide="prev"> <span class="icon-prev"></span></a>
+    <a class="right carousel-control" href="index.html#myCarousel" data-slide="next">  <span class="icon-next"></span></a>
+  </div><!-- /.carousel -->
+
+  <hr class="featurette-divider">
+  <!-- Carousel
+  ================================================== -->
+</div>

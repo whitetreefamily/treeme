@@ -1,0 +1,51 @@
+
+    <% @articles.each do |article| %>
+        <div class="article-index" style=" height: auto;margin-bottom: 4%;position: relative;left: 5%">
+            <% if article.user.image.present? %>
+                <%=link_to image_tag(article.user.image_url.to_s, :class=>"img-circle", :width=>"50px;",:height=>"50px;", :style => " float:left;left;margin-right: 4px;:height:50px;"), article.user%>
+            <% else %>
+                <%=link_to image_tag("tree.png", :width=>"50px;",:height=>"50px;", :style => " float:left;left;margin-right: 4px;:height:50px;",:class=>"img-circle"), article.user %>
+            <% end %>
+            <b style="float: left;margin-right: 4px"> <%=article.user.name %></b><p style="float: right;margin-right: 4px"><%= time_ago_in_words(article.created_at) %></p>
+            <div style="margin-top: 1px;text-align: center;width: 90%;height: 30px">
+            </div>
+            <% if article.image.present? %>
+                <%=image_tag article.image_url.to_s, :class=>"article-image", :width=>"100%;",:height=>"180px;",:style =>" margin-bottom: 14px;"%>
+            <% else %>
+            <% end %>
+            <p style="color: #59595a;">
+              <b><%= link_to truncate(article.body, :length => 100,), article  %></b>
+            </p>
+            <% if current_user %>
+                <% if current_user.id   ==   article.user.id  %>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+                    <ul class="dropdown-menu" style="padding: -3px">
+                      <li style="text-align: center">
+                        <a href="#" data-toggle="modal" data-target="#modal-<%= article.id %>"><b style="color: #0074d9"> Edit </b></a>
+                        <p style="font-size: 12px"> <%= link_to '<i class="glyphicon glyphicon-trash"></i>&nbspDelete '.html_safe, article, method: :delete, data: { confirm: 'Are you sure?' },:style=>"color:red" %> </p>
+                      </li>
+                    </ul>
+                <% end %>
+            <% end %>
+            <b> From </b>  <%=link_to article.page.name, article.page %> <%= article.comments.count %>Comments  <span class="glyphicon glyphicon-eye-open"></span><%= article.views%>
+            <div id="modal-<%=article.id %>" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><%=article.title %></h4>
+                  </div>
+                  <div class="modal-body">
+                    <%= bootstrap_form_for article, method: :put do |f|%>
+                        <%= render(:partial => "articles/inline", :locals => {:f => f}) %>
+                    <%end%>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+        </div>
+
+    <% end %>
+

@@ -1,0 +1,124 @@
+<style type="text/css">
+    .normal-branch{
+        width: 105%;
+        background: #fff;
+        padding: 0.7px;
+        padding-top: 4px;
+        text-align: center;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        font-family: 'Open Sans Light', sans-serif;
+        margin-bottom: 2%;
+        position: relative;
+        right: 2%;
+    }
+  .div-body-image{
+      width: 105%;
+      background: #fff;
+      padding: 0.7px;
+      padding-top: 4px;
+      text-align: center;
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+      font-family: 'Open Sans Light', sans-serif;
+      margin-bottom: 2%;
+      position: relative;
+      right: 2%;
+  }
+</style>
+<div class="normal-branch">
+  <% if @user.image.present? %>
+      <a href="#" data-toggle="modal" data-target="#modal-5" ><%= image_tag(@user.image,:width=>"50%;",:height=>"55px;",:class=>"img-thumbnail")  %></a>
+  <% else  %>
+      <a href="#" data-toggle="modal" data-target="#modal-5"><%= image_tag("tree.png",:width=>"77px;",:height=>"55px;",:class=>"img-thumbnail")  %></a>
+  <% end %>
+</div>
+<div class="div-body-image">
+  <div style="border-bottom: solid forestgreen 1px">
+    <b> Tree own  <i class="glyphicon glyphicon-tree-deciduous"></i></b><br>
+  </div>
+  <table class="user-t" style="position: relative;width: 100%;">
+    <% for friendship in @user.blog %>
+    <%= link_to  friendship.name,friendship%>
+     <% end %>
+  </table>
+</div>
+ <div class="div-body-image">
+   <div style="border-bottom: solid forestgreen 1px;margin-bottom: 3%">
+     <b> Your branch  <i class="glyphicon glyphicon-leaf">Out</i></b><br>
+   </div>
+   <table class="user-t" style="position: relative;width: 100%;">
+     <% for friendship in @user.branches %>
+     <tr>
+       <td> <%= link_to  friendship.page.name,friendship.page%></td>
+       <td>
+         <% if current_user %>
+             <% if current_user.id   ==   @user.id  %>
+                 <%= link_to '<i class="glyphicon glyphicon-plus"></i>'.html_safe, looking_branch_path(friendship), method: "post", :class=>"btn btn-success btn-sm" ,:rel=>"external" %>
+             <% end %>
+         <% end %>
+         <hr>
+       </td>
+     </tr>
+    <% end %>
+   </table>
+ </div>
+
+    <div id="modal-5" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Profile Avatar</h4>
+          </div>
+          <div class="modal-body">
+            <% @user = User.find(params[:id]) %>
+            <%= bootstrap_form_for(@user) do |f| %>
+
+                <% if @user.errors.any? %>
+                    <div id="error_expl" class="panel panel-danger">
+                      <div class="panel-heading">
+                        <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+                      </div>
+                      <div class="panel-body">
+                        <ul>
+                          <% @user.errors.full_messages.each do |msg| %>
+                              <li><%= msg %></li>
+                          <% end %>
+                        </ul>
+                      </div>
+                    </div>
+                <% end %>
+                <div style="text-align: center">
+                  <div class="control-group">
+                    <div class="controls">
+                      <%= f.hidden_field :name, :class => 'form-control',:value=> current_user.name  if current_user %>
+                    </div>
+                    <br>
+
+                    <%= f.file_field :image, :class => 'form-control' %>
+
+
+                  </div><br>
+
+
+
+
+                  <%= f.hidden_field :email, :class => 'form-control',:value => current_user.email if current_user %>
+
+
+
+                  <%= f.hidden_field :password_hash, :class => 'form-control' %>
+                  <br>
+                </div>
+            <div style="height: 20px"></div>
+            <br>
+          </div>
+          <div class="modal-footer">
+            <%= f.submit "update profile image", :class => 'btn btn-primary' %>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+            <% end %>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+

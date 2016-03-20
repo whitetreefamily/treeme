@@ -1,0 +1,179 @@
+<script>
+    $(document).ready(function(){
+        $("#flip1").click(function(){
+            $("#panel1").slideToggle("slow");
+        });
+    });
+    $(document).ready(function(){
+        $("#flip3").click(function(){
+            $("#panel3").slideToggle("slow");
+        });
+    });
+</script>
+<div class="user-full-body">
+  <div class="user-full-sub">
+    <div class="user-image-body">
+      <div class="user-image-sub">
+        <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-xs " >
+          <% if @user.image.present? %>
+            <%= image_tag @user.image_url.to_s, :width =>"100%" ,  :height=>"75px" %>
+          <% else %>
+              <%= image_tag "tree.png" , :width =>"100%" ,  :height=>"75px" %>
+           <% end %>
+              </a>
+
+      </div>
+      <div class="user-image-sub1" >
+        <h4><b> <%= @user.name %></b></h4>
+        <h6> <%= @user.email %></h6>
+        <h6 style="color: #101010"> <%= @user.sex %></h6>
+      </div>
+    </div>
+    <div class="normal-body"></div>
+    <div style="text-align:justify">
+      <%if @user.bio.present?  %>
+          <%= @user.bio %>
+      <% else %>
+          <b>Update your Bio </b>
+      <% end %>
+    </div>
+    <div class="normal-body1">
+      <b>Tree  owner</b> <span style="font-size:1.3em;margin-right: 4%;color: forestgreen" class="glyphicon glyphicon-tree-deciduous"></span>
+    </div>
+    <div class="normal-body2">
+      <% for friendship in @user.pages %>
+          <ul  class="list-body-show-sub">
+            <li><%= link_to image_tag(friendship.image_url.to_s, :class=>"img-circle", :width=>"25px;",:height=>"25px;", ), friendship%>   <%= link_to  friendship.name,friendship%></li>
+            <li><%= link_to "Delete "'<i class="glyphicon glyphicon-tower"></i>'.html_safe, friendship, :class=>"btn btn-success btn-xs",:style => " text-decoration:none;color:#000", :method => :delete %></li>
+          </ul>
+      <% end %>
+    </div>
+    <div class="normal-body1">
+
+    </div>
+    <div class="normal-body2">
+      <div class="list-body-show">
+        <a href="#"  data-toggle="modal" data-target="#modal-delete"><b style="color: #0074d9" class="btn btn-default"> Am Not Happy </b></a>
+      </div>
+    </div>
+
+  </div>
+  <div class="user-full-sub1">
+    <div class="show-article-me" >
+           <%= @user.name  %>
+      Edit profile
+      <%=bootstrap_form_for @user, :html => { :class => "form-horizontal user" } do |f| %>
+  <br>
+          <% if @user.errors.any? %>
+              <div id="error_expl" class="panel panel-danger">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %></h3>
+                </div>
+                <div class="panel-body">
+                  <ul>
+                    <% @user.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+          <% end %>
+          <div style="text-align: center;margin-top: 6%" >
+            <div class="control-group">
+
+              <div class="controls">
+                <%= f.text_field :name, :class => 'form-control', :label =>" Username" %>
+              </div>
+              <%= error_span(@user[:name]) %>
+            </div>
+
+
+
+
+            <%= f.hidden_field :password_hash, :class => 'form-control' %>
+
+            <%unless @user.categories.present?  %>
+                <h1><b> Interests  </b> </h1>
+                <div class="control-group">
+                  <div class="controls">
+                    <% Category.all.each do |category| %>
+                        <%= check_box_tag 'user[category_ids][]', category.id,
+                                          @user.category_ids.include?(category.id), id: dom_id(category) %>
+                        <%= label_tag dom_id(category), category.name, class: "check_box_label" %>
+                    <% end %>
+                  </div>
+                </div>
+            <% end %>
+            <br>
+
+
+            <div class="controls">
+              <%= f.text_area :bio, :class => 'form-control',:label =>" What about you", :placeholder=>"Enter Bio",:style=>"width:100%;height:110px" %>
+            </div>
+
+
+
+
+
+
+
+            <%= f.submit nil, :class => 'btn btn-primary' %>
+            <a href="#"  data-toggle="modal" data-target="#modal-<%= @user.id %>"><b style="color: #0074d9" class="btn btn-default"> More option </b></a>
+
+      <% end %>
+      <hr>
+
+
+
+
+      </div>
+
+
+
+  </div>
+</div>
+</div>
+
+<div id="modal-<%=@user.id %>" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">More option</h4>
+      </div>
+      <div class="modal-body">
+               <%= render "users/bio" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-delete" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Tell us what you think about this application</h4>
+      </div>
+      <div class="modal-body">
+        <b> <----------- Am Not Happy ---------------></b><br>
+        <%= link_to "DELETE ", user_path(@user), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger',:style =>"width:60%"  %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title">Change Avater</h4>
+      </div>
+      <div class="modal-body">
+        <%= render "users/enter_name"%>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

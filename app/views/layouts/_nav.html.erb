@@ -1,0 +1,84 @@
+<!-- Static navbar -->
+<div class="navbar navbar-inverse" style="margin-bottom: 1.7%">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <li class="active"> <li class=<%= current_page?(welcome_index_path) || current_page?(root_path) ? "active" : "" %> </li>
+      <li>
+        <div class="link-application"><%= link_to '<span style="font-size:2.1em;color: green;" class="glyphicon glyphicon-list-alt"></span>&nbsp '.html_safe, articles_path %></div>
+      </li>
+      <li>
+        <div class="link-application"><%= link_to '<span style="font-size:2.0em;color: green;" class="glyphicon glyphicon-tree-deciduous"></span>&nbsp '.html_safe, pages_path %></div>
+      </li>
+
+      <li  style="margin-left: 440px;margin-bottom: 20px;">
+          <div class="link-application1">
+            <%=link_to image_tag("slate4434 copy.png", :width=>"80px;",:height=>"50px;", :style => " :height:50px;")%>
+          </div>
+      </li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% unless current_user %>
+          <li class="active"> <li class=<%= current_page?(welcome_index_path) || current_page?(root_path) ? "active" : "" %> > <%= link_to ("Sign in"), root_path,:style=>"font-size:15px"%></li>
+      <% end %>
+      <% if current_user %>
+          <li style="margin-bottom: 2%">
+            <div style="width:10%;height: 2%;margin-right: 5%;position: relative;top: 16px">
+              <% if current_user.image.present? %>
+                  <%=link_to  image_tag(current_user.image_url.to_s, :width=>"25px;",:height=>"25px;",:class=>"img-circle"),current_user  %>
+              <% else %>
+                  <%=link_to image_tag("tree.png", :width=>"25px;",:height=>"25px;",:class=>"img-circle" ), current_user  %>
+              <% end %>
+            </div>
+      <%end %>
+      </li>
+      <% if current_user %>
+          <li class="dropdown" style="background:#000000;color:#fff;position: relative;left: 1%">
+            <a href="index.html#" class="dropdown-toggle" data-toggle="dropdown">
+              <%=  current_user.name %>
+              <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li>  <%= link_to '<i class="glyphicon glyphicon-user" style="font-size:1.0em;color:forestgreen"></i>&nbspProfile'.html_safe, current_user%></li>
+              <li class="divider"></li>
+              <% @user = current_user if current_user %>
+              <li><%= link_to '<i class="glyphicon glyphicon-cog" style="font-size:1.0em;color:forestgreen"></i>&nbspSettings'.html_safe, edit_user_path(@user) %> </li>
+              <li class="divider"></li>
+              <% @user = current_user if current_user %>
+              <li><%= link_to '<i class="glyphicon glyphicon-leaf" style="font-size:1.0em;color:forestgreen"></i>&nbspLeafs'.html_safe, users_path %> </li>
+              <li class="divider"></li>
+              <li>
+                <% if current_user %>
+                    <%= link_to '<i class="glyphicon glyphicon-off" style="font-size:1.0em;color:forestgreen"></i>&nbspLogout'.html_safe, log_out_path%>
+              <%end %>
+            </ul>
+          </li>
+      <% end %>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
+        <ul class="dropdown-menu" style="padding: -3px">
+          <li>
+            <a href="/welcome/tour">
+              <b style="color:forestgreen"> Help </b><br>
+              <p style="font-size: 12px">  overview of the site and <br> how to use it</p>
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="/welcome/meta">
+              <b style="color: forestgreen"> About</b><br>
+              <p style="font-size: 12px"> info</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li style="width:120px"></li>
+    </ul>
+  </div><!--/.nav-collapse -->
+</div>

@@ -1,0 +1,146 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#panel3
+{
+  width: 75%;
+  padding:30px;
+  display:none;
+  text-align:center;
+}
+#flip3{
+  position: relative;
+  top: 0px;
+  left: 2%;
+}
+#flip3
+{
+
+  position: relative;
+  left: 6%;
+}
+.page-show-title{
+  background: #fff;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+}
+.page-show-body{
+  width: 100%;
+  height: 40px;
+  position: relative;
+  font-size: 200%;
+  color: #f0f0f0;
+  text-align: left;
+}
+ .active-list li{
+  display: inline;
+   position: relative;
+   right: 5%;
+   bottom: 14px;
+}
+ .page-user-type{
+   width: 100%;
+   height: auto;
+   text-align: left;
+   margin-bottom: 2px;
+ }
+ .page-show-article-body{
+   width:110%;
+   height: auto;
+   position: relative;
+ }
+ #panel1
+ {
+   padding:30px;
+   display:none;
+   position: relative;
+   left: 6%;
+ }
+#panel1,#flip1
+{
+  padding:2px;
+  text-align:center;
+}
+.page-find-index{
+  width: 80%;
+}
+.enter-place-index{
+  width:80%;
+  height: auto;
+  padding-top: 20px;
+  border-top: solid 1px #afd9ee;
+}
+
+.index-page-body{
+  width:100%;
+  height: auto;
+  border-top: solid 1px #afd9ee;
+  padding-top: 1%;
+}
+
+.box-page-body li{
+  display: inline-block;
+  margin-top: 4px;
+}
+.box-sub{
+  border: solid 1px #afd9ee;
+  width:190px;
+  height: 60px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+
+}
+.box-sub1{
+  width:80px;
+  height: 25px;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 12px;
+}
+.box-sub2{
+  background: deepskyblue;
+  width:80px;
+  height: 25px;
+  position: relative;
+  bottom: 25px;
+  left: 108px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 12px;
+}
+.box-sub3{
+  background: #F7F7F7;
+  width:100%;
+  height: 25px;
+}
+.index-page-pagination{
+  width:100%;
+  height: 60px;
+}
+.index-page-fuller{
+  background: #F7F7F7;
+  width:100%;
+  height: 90px;
+
+}
+.article-index-branch{
+  background: #fff;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+  width: 85%;
+  position: relative;
+  left:5%;
+  bottom: 20px;
+}

@@ -1,0 +1,17 @@
+<%= div_for comment do %>
+<div class="comment-body" >
+  <div class="show-comment">
+    <% if comment.user.image.present? %>
+        <%=link_to image_tag(comment.user.image_url.to_s, :class=>"img-circle", :width=>"50px;",:height=>"50px;", :style => " float:left;left;margin-right: 4px;:height:50px;"), comment.user%> <p style="float: left;margin-right: 4px"><b><%=  comment.user.name %></b></p>   <p style="float: right;margin-right: 4px"><b><%= time_ago_in_words(comment.created_at) %></b></p>
+     <% else %>
+        <%=link_to image_tag("tree.png", :class=>"img-circle", :width=>"50px;",:height=>"50px;", :style => " float:left;left;margin-right: 4px;:height:50px;"), comment.user%> <p style="float: left;margin-right: 4px"><b><%=  comment.user.name %></b></p>   <p style="float: right;margin-right: 4px"><b><%= time_ago_in_words(comment.created_at) %></b></p>
+  <% end %>
+  </div>
+     <%= comment.body %>
+  <% if current_user   && comment.user_id     ==   current_user.id %>
+      |<%= link_to 'Delete', article_comment_path(:article_id => @article,  :id => comment), confirm: 'Are you sure?', method: :delete,  :style => "color:goldenrod" %>
+  <% end %>
+  <div style="height: 8px"></div>
+</div>
+
+<% end %>

@@ -1,0 +1,32 @@
+
+<%= form_for @page, :html => { :class => "form-horizontal page" } do |f| %>
+
+    <% if @page.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @page.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+    <% end %>
+    <div class="control-group" >
+
+      <% if  @user = current_user.id.present?  %>
+      <div class="control-group">
+        <div class="controls">
+          <%   @user = current_user %>
+          <%= check_box_tag 'page[user_ids][]', @user.id, @page.user_ids.include?(@user.id),:style=>"width:30px" %>
+          <%= f.submit "Follow", :class => 'btn btn-primary',:class=>"btn btn-primary btn-sm" %>
+        </div>
+      </div>
+       <% end %>
+
+    </div>
+
+<% end %>

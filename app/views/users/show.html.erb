@@ -1,0 +1,159 @@
+<div class="user-full-body">
+     <div class="user-full-sub">
+       <div class="user-image-body">
+         <div class="user-image-sub">
+           <% if @user.image.present? %>
+             <%= image_tag @user.image_url.to_s,  :width =>"100%" ,  :height=>"75px" %>
+           <% else %>
+               <%= image_tag "tree.png" , :width =>"100%" ,  :height=>"75px" %>
+           <% end %>
+         </div>
+         <div class="user-image-sub1" >
+           <h4><b> <%= @user.name %></b></h4>
+           <h6> <%= @user.email %></h6>
+           <h6 style="color: #101010"> <%= @user.sex %></h6>
+         </div>
+       </div>
+          <div class="normal-body"></div>
+         <div style="text-align:justify">
+            <%if @user.bio.present?  %>
+                 <%= @user.bio %>
+              <% else %>
+              <b>Update your bio </b>
+           <% end %>
+        </div>
+       <div class="normal-body1">
+            <b>Tree  owner</b> <span style="font-size:1.3em;margin-right: 4%;color: forestgreen" class="glyphicon glyphicon-tree-deciduous"></span>
+         <% if current_user %>
+             <% if current_user.id   ==   @user.id  %>
+                <a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs "> <span class="glyphicon glyphicon-plus"></span>Grow a tree</a>
+             <% end %>
+           <%end%>
+       </div>
+       <div class="normal-body2">
+         <% for friendship in @user.blog %>
+             <ul  class="list-body-show-sub">
+               <li><%= link_to image_tag(friendship.image_url.to_s, :class=>"img-circle", :width=>"25px;",:height=>"25px;", ), friendship%>   <%= link_to  friendship.name,friendship%></li>
+               <% if current_user %>
+               <% if current_user.id   ==   @user.id  %>
+               <li><%= link_to "Delete "'<i class="glyphicon glyphicon-tower"></i>'.html_safe, friendship, :class=>"btn btn-success btn-xs",:style => " text-decoration:none;color:#000", :method => :delete %></li>
+               <% end %>
+               <% end %>
+             </ul>
+            <% end %>
+       </div>
+       <div class="normal-body1">
+          <b>Branch in <%= @user.branches.count %></b> <span style="font-size:1.3em;color: forestgreen" class="glyphicon glyphicon-leaf"></span>
+       </div>
+       <div class="normal-body2">
+         <div class="list-body-show">
+             <% for friendship in @user.branches %>
+               <li style="list-style-type: none">
+                 <ul  class="list-body-show-sub">
+                   <li><%= link_to image_tag(friendship.page.image_url.to_s, :class=>"img-circle", :width=>"25px;",:height=>"25px;", ), friendship.page%>   <%= link_to  friendship.page.name,friendship.page%></li>
+                   <% if current_user %>
+                   <% if current_user.id   ==   @user.id  %>
+                   <li><%= link_to '<i class="glyphicon glyphicon-tree-deciduous">Out</i>'.html_safe, friendship, :class=>"glyphicon glyphicon-pushpin", :class=>"btn btn-success btn-xs", :style => " text-decoration:none;color:#000", :method => :delete %></li>
+                   <% end %>
+                  <% end %>
+                 </ul>
+               </li>
+             <%end%>
+         </div>
+       </div>
+     </div>
+   <div class="user-full-sub1">
+      <div class="show-article-me">
+        <%if @user.categories.present?  %>
+            <b> Interests:</b>
+            <% @user.categories.all.each do |category| %>
+                <button type="button" class="btn btn-default btn-xs"><%=   category.name  %></button>
+            <% end %>
+        <% else %>
+            <b> Interests:</b>No Interest yet
+        <% end %>
+      </div>
+     <% if current_user.pages.empty? %>
+      <ul class="page-user-show-body">
+         <%  @pages.where("views >= 50").take(10).each do |article| %>
+             <li>
+                 <div class="page-user-show">
+                   Tree own:
+                   <div class="btn-group">
+                     <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                       <%= article.user.name%>
+                       <span class="caret"></span>
+                     </a>
+                     <ul class="dropdown-menu">
+                       <% if article.user.image.present? %>
+                         <%= link_to image_tag(article.user.image_url.to_s,  :width=>"100%;",:height=>"50px;", ), article.user%>
+                       <% else %>
+                           <%= link_to image_tag("tree.png",  :width=>"100%;",:height=>"50px;", ), article.user%>
+                       <%end%>
+                       <ul class="list-tree-branch">
+                         <% if article.user.blog.present? %>
+                             <b>Owner of tree</b>:
+                             <%  article.user.blog.each do  | article| %>
+                                 <li>@<%= link_to article.name, article%> </li>
+                             <% end %>
+                         <% else %>
+                             <b>Bio</b>:
+                             <% if article.user.bio.present? %>
+                                 <li><%= article.user.bio %> </li>
+                             <%else%>
+                                 No Biography yet
+                             <% end %>
+                             </ul>
+                         <% end %>
+                     </ul>
+                   </div>
+                   <%= link_to image_tag(article.image_url.to_s,  :width=>"100%;",:height=>"130px;", ), article%>
+
+                       <h4 style="color: green"><%= article.name %></h4>
+                   <% @users = current_user.id if current_user %>
+                   <div class="natice-body">
+                     <% if current_user %>
+
+                         Have you   <%= link_to '<i class="glyphicon glyphicon-pushpin"></i>&nbspBranch in'.html_safe, branches_path(:user_id => @users, :check => @check, :page_id => article.id), :class=>"btn btn-primary btn-sm",:style => " text-decoration:none ;",:method => :post %>
+                     <% else %>
+                         To Branch In  <%= link_to '<i class="glyphicon glyphicon-pushpin"></i>&nbspSign Up '.html_safe, welcome_index_path,:class=>"btn btn-primary btn-sm"%>
+                     <%end%>
+                     </div>
+                 </div>
+             </li>
+         <% end %>
+       </ul>
+     <% end %>
+     <% if current_user.pages.present? %>
+
+         <div id="products">
+              <%= render @articles %>
+         </div>
+     <% end %>
+
+
+
+
+
+  </div>
+  <%=will_paginate @articles %>
+</div>
+
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Create tree</h4>
+      </div>
+      <div class="modal-body">
+          <%= render "pages/blog_user" %>
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

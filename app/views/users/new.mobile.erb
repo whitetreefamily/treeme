@@ -1,0 +1,71 @@
+<style type="text/css">
+    .staree-logo{
+        width: 105%;
+        background: forestgreen;
+        padding: 0.7px;
+        padding-top: 4px;
+        text-align: center;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        font-family: 'Open Sans Light', sans-serif;
+        margin-bottom: 2%;
+        margin-top: 2%;
+        position: relative;
+        right: 2%;
+        color: #fff;
+        font-size:170%;
+    }
+    .sign-up{
+        width: 105%;
+        background: #fff;
+        padding: 0.7px;
+        padding-top: 10%;
+        text-align: center;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        font-family: 'Open Sans Light', sans-serif;
+        margin-bottom: 2%;
+        margin-top: 5%;
+        position: relative;
+        right: 2%;
+        padding-left: 10%;
+    }
+    .sign-up-sub{
+        width: 105%;
+        background: #fff;
+        padding: 10.7px;
+        text-align: center;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        font-family: 'Open Sans Light', sans-serif;
+        position: relative;
+        right: 2%;
+        padding-top: 2%;
+        margin-bottom: 3%
+    }
+    .sign-up-fulter{
+        padding-left: 15%;
+        margin-bottom: 15%
+    }
+</style>
+<div class="staree-logo">
+  <b>Welcome Statree</b>
+
+</div>
+<b>   Join  Slatree</b><br>
+<div class="sign-up">
+  <%=  form_for @user,validate: true, :html => { :class => "form-horizontal user" } do |f| %>
+      <%= f.text_field :name, :autofocus => false,:class => 'form-control',:style=>"width:85%", :placeholder => "Username" %>
+      <br>
+      <%= f.email_field :email, :class => 'form-control',:style=>"width:85%", :autofocus => false, :placeholder => "Email" %>
+      <br>
+      <%= f.password_field :password,:class => 'form-control',:style=>"width:85%", :placeholder => "Password"  %>
+      <br>
+      <%= f.password_field :password_confirmation,:class => 'form-control',:style=>"width:85%", :placeholder=>"Retype-password" %>
+      <div style="height: 40px"></div>
+      </div>
+      <div class="sign-up-sub">
+        <input type="submit" value="Create"  style="width:65%; " class="btn btn-success" data-iconpos="top" /><a href="/passbys/new" data-transition="slide" class="btn btn-primary" style="width:30%;margin-left:5%"><b>Sign in</b></a>
+      </div>
+  <% end %>
+
+  <div class="sign-up-fulter">
+
+  </div>

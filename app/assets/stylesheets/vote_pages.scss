@@ -1,0 +1,44 @@
+// Place all the styles related to the vote_pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.vote-page-nav-info{
+  width: 75%;
+  height: 40px;
+  position: relative;
+  margin-bottom: 5%;
+  left: 10%;
+  font-size: 200%;
+  padding-top: 10px;
+  color: #f0f0f0;
+  border: 5px solid #d3e0e9;
+}
+.vote-page-show-infor{
+  width: 80%;
+  height: 190px;
+  background: forestgreen;
+  position: relative;
+  top: 30px;
+  margin-bottom: 60px;
+  border-radius: 0px 0px 70px 70px;
+
+}
+.vote-page-show-info-sub{
+  width:50%;
+  height: 60px;
+  border-radius: 30px;
+  background: #ffffff;
+  text-align: center;
+  margin-top:20px ;
+  position: relative;
+  left: 25%;
+  border: 5px solid #d3e0e9;
+}
+.vote-page-navigation{
+  width: 75%;
+  height: 40px;
+  position: relative;
+  font-size: 200%;
+  margin-bottom: 110px;
+
+
+}

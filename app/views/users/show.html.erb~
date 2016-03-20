@@ -1,0 +1,161 @@
+<script xmlns="http://www.w3.org/1999/html">
+    $(document).ready(function(){
+        $("#flip").click(function(){
+            $("#panel").slideToggle("slow");
+        });
+    });
+    $(document).ready(function(){
+        $("#flip2").click(function(){
+            $("#panel2").slideToggle("slow");
+        });
+    });
+    $(document).ready(function(){
+        $("#flip3").click(function(){
+            $("#panel3").slideToggle("slow");
+        });
+    });
+</script>
+<style>
+  body{
+      background:#fff;
+  }
+
+</style>
+
+
+<div class="row" style="width: 100%;margin-bottom: 2%">
+     <div style="height: 40px"></div>
+  <div class="col-md-3 ">
+    <div class="user-show-info-body" style="margin-bottom: 63%">
+      <% if @user.image.present? %>
+          <a data-toggle="modal" href="#myModal">   <%= image_tag @user.image_url.to_s, :width=>"100px;",:height=>"100px;", :style => "position:relative;top:37px; z-index: 2;",:class=>"img-circle" %></a>
+            <% else %>
+          <a data-toggle="modal" href="#myModal">  <%= image_tag "tree.png", :width=>"100px;",:height=>"100px;", :style => "position:relative;top:37px; z-index: 2;",:class=>"img-circle" %></a>
+      <% end %>
+          <div class="user-show-info-body-sub">
+        <div class="qf b aml" style="height: auto">Post And Comment</div>
+        <div class="user-show-infor">
+          <button type="button" class="btn btn-default btn-sm">Post <%=@user.articles.count  %></button>!<button type="button" class="btn btn-default btn-sm">Comment <%=@user.comments.count  %></button>
+          <div style="height:2px"></div>
+        </div>
+        <% if current_user %>
+            <div class="user-show-infor">
+              <div class="qf b aml" style="height: auto"> Your  Toter Vote   ( <%= @user.total_votes %>)</div>
+              <div style="height: 2px"></div>
+            </div>
+        <% end %>
+                <div class="qf b aml" style="margin-bottom: 3px">
+                  <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+                  </span>
+                  Branch In (<%= @user.branches.count %>)</div>
+              <% for friendship in @user.branches %>
+                <%= link_to image_tag(friendship.page.image_url.to_s, :class=>"img-circle", :width=>"25px;",:height=>"25px;", ), friendship.page%>   <%= link_to  friendship.page.name,friendship.page%>
+                  (<%= link_to "Branch out", friendship, :method => :delete %>)
+              <% end %>
+                <b> Favorites:</b>No Favorites yet
+            <br>
+            <% if current_user %>
+                <button type="button" class="btn btn-danger btn-sm" style="margin-top: 5%"> <%= link_to "Log out", log_out_path,:class=>"fa fa-power-off fa-lg"%></button>
+            <% end %>
+      </div>
+    </div>
+  </div>
+
+    <div class="col-md-9  " style="margin-bottom: 5%;position: relative;left: 5%">
+      <div class="what-you-love">
+        <%if @user.categories.present?  %>
+            <b> Interests:</b>
+           <% @user.categories.all.each do |category| %>
+                <button type="button" class="btn btn-default btn-xs"><%=   category.name  %></button>
+            <% end %>
+             <% else %>
+                <b> Interests:</b>No Interests yet
+       <% end %>
+      </div>
+         <div class="user-show-edit">
+           <div class="row">
+             <div class="col-md-9 col-md-push-3">
+               <div style="height: 34px"></div>
+               <a id="flip2"  href="#"><button type="button" class="btn btn-success  btn-xs">Edit</button></a>
+               <div id="panel2">
+                 <%= render "users/enter_name" %>
+               </div>
+             </div>
+             <div class="col-md-3 col-md-pull-9">
+               <h1> <b><%= @user.name  %> </b></h1>
+               <button type="button" class="btn btn-default btn-sm">Sex</button>!
+               <button type="button" class="btn btn-default btn-sm"><%=@user.sex%></button>
+             </div>
+           </div>
+           <div class="row" style="margin-top: 1%">
+             <div class="col-md-9 col-md-push-3" >
+               <%if @user.bio.present?  %>
+                   <a id="flip3" style="position: relative;top:30px" href="#"><button type="button" class="btn btn-success  btn-xs">Edit</button></a>
+                 <% else %>
+                   <a id="flip3"   href="#"><button type="button" class="btn btn-success  btn-xs">Edit</button></a>
+                 <% end %>
+               <div id="panel3">
+                 <br>
+                 <%= render "users/bio" %>
+               </div>
+             </div>
+             <div class="col-md-3 col-md-pull-9">
+               <%if @user.bio.present?  %>
+                     <b><h3>Bio</h3> </b>
+                   <% else %>
+                     <b>What about your bio </b>
+               <% end %>
+             </div>
+           </div>
+
+         </div>
+
+        <div class="bio-show">
+          <%if @user.bio.present?  %>
+         <i> <%= @user.bio  %></i>
+          <%else%>
+              <i>   No bio yet </i>
+          <% end %>
+        </div>
+        <br>
+      <div class="user-show-time-line">
+        <div class="user-show-time-title">
+          <b>Your Time Line</b>
+        </div>
+        <div class="user-show-time">
+         <%= render "articles/user_post" %>
+          </div>
+      </div>
+    </div>
+
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div  style="text-align: center; background: forestgreen;border-radius: 10%;margin-bottom: 4%">
+      <h4 class="modal-title">Edit Photo <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="position: relative;right: 2%">&times;</button></h4>
+    </div>
+    <div class="modal-content" style="text-align: center">
+      <% if current_user %>
+      <% if current_user.image.present? %>
+          <%=link_to  image_tag(current_user.image_url.to_s, :width=>"100px;",:height=>"100px;",:class=>"img-circle"),current_user  %>
+      <% else %>
+          <%=link_to  image_tag("default-user.jpg", :width=>"50px;",:height=>"50px;",:class=>"img-circle"),current_user  %>
+      <% end %>
+      <% end %>
+
+      </div>
+      <div class="modal-body" style="text-align: center">
+             <%= render "users/rende_user_edit" %>
+      </div>
+
+    <!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+

@@ -1,0 +1,314 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.index-user-all{
+  width:70%;
+  height: auto;
+  float: right;
+}
+.index-body-input{
+  width:100%;
+  height: 100px;
+  position: relative;
+  bottom: 20px;
+}
+.index-list-body{
+  width:100%;
+  background: #fff;
+  height: 70px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+}
+.index-user-list-body{
+  width:25%;
+  height: auto;
+  float:right;
+  position: relative;
+  top:10px
+}
+.list-tree-branch{
+  position: relative;
+  right: 10%;
+}
+.list-tree-branch li{
+  display: inline-block;
+
+}
+.index-list-body1{
+  width:270px;
+  height: 80px;
+  position: relative;
+  right: 10%;
+}
+.index-user-list-left{
+  width:76%;
+  height: auto;
+  text-align: left;
+}
+.index-list-left-sub{
+  float:right;
+  width:15%;
+  height: auto;
+  position: relative;
+}
+.index-list-left-sub1{
+  width:80%;
+  height: auto;
+}
+.index-list-body1-sub{
+  background: #fff;
+  width:95.5%;
+  position: relative;
+  left: 6%;
+  padding: 1%;
+  text-align: left;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+}
+
+
+
+
+.user-full-body{
+  width: 110%;
+  position: relative;
+  right: 10%;
+}
+.user-full-sub{
+  width: 37%;
+  float: left;
+  padding: 3px;
+  height: auto;
+  background: #fff;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+}
+.user-image-body{
+  background:forestgreen;
+  height: 140px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+}
+.user-image-sub{
+  background: #fff;
+  width: 100px;
+  height: 70px;
+  padding: 5px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+  position: relative;
+  top: 10px;
+}
+.user-image-sub1{
+  float: right;
+  position: relative;
+  bottom: 2%;
+  color: #ffffff;
+}
+.normal-body1{
+  background: #fff;
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+  position: relative;
+}
+.normal-body2{
+  width: 95%;
+  height: auto;
+  position: relative;
+  left: 2%;
+  padding-top: 2%;
+}
+.list-body-show{
+  width: 100%;
+}
+.list-body-show-sub {
+  position: relative;
+  right: 10%;
+}
+
+.list-body-show-sub li{
+  display: inline-block;
+  font-size: 120%;
+  margin-left: 5%;
+
+}
+.list-body-show-sub1{
+  width: auto;
+  height: 40px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+  position: relative;
+}
+.user-full-sub1{
+  width: 60%;
+  float: left;
+  height: auto;
+  position: relative;
+  bottom: 30px;
+  left: 25px;
+}
+.show-article-me{
+  background: #fff;
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+  position: relative;
+}
+.article-users{
+  background: #fff;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+  width: 90%;
+  margin-top: 3%;
+}
+.page-user-show{
+  margin-top: 10%;
+  margin-bottom: 5px;
+  width: 230px;
+  background: #fff;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+  height: 230px;
+
+}
+.page-user-show-body{
+ position: relative;
+  right: 10%;
+}
+.page-user-show-body li{
+  display: inline-block;
+  width: 200px;
+  margin-left: 11%;
+}
+.page-user-show-title{
+  width:100%;
+  height: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#panel
+{
+  padding:30px;
+  display:none;
+}
+#panel,#flip
+{
+  padding:5px;
+  text-align:center;
+  border:solid 1px #c3c3c3;
+}
+#panel2
+{
+  padding:30px;
+  display:none;
+  width: 75%;
+}
+#panel2,#flip2
+{
+  padding:5px;
+  text-align:center;
+  position: relative;
+  right: 0%;
+}
+
+.username{
+
+}
+.name-edit{
+  position: relative;
+  bottom:30px ;
+  left: 11%;
+}
+.what-you-love{
+  width: 100%;
+  margin-top: 2%;
+}
+.what-love-show{
+  width: 100%;
+  height: 20px;
+}
+.ca {
+  margin-bottom: 20px;
+  padding-left: 0;
+}
+.b {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #ffffff;
+  border: 1px solid #d3e0e9;
+}
+.b:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+.b:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.user-index-body{
+  background: #f5f5f5;
+  width: 140px;
+  height: auto;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  font-family: 'Open Sans Light', sans-serif;
+  font-size: 14px;
+  color: #989c9e;
+}
+.index-user-fuller{
+  background:lightgreen;
+  width:100%;
+  height: 90px;
+}

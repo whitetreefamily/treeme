@@ -1,0 +1,17 @@
+<ul>
+<% @contestants.each do |contestant| %>
+      <li class="box">
+       <div class="contestant-vote-show">
+             <%= image_tag "topbanner.png",:style=>"height:44%; width:32%; position:absolute;bottom:60%;left:100%" %>
+              <button type="button" class="btn btn-default" style="border-radius: 100px;position:absolute;bottom:15%;left:55%"><b><%=  contestant.votes  %></b></button>
+                 <%=image_tag contestant.image_url.to_s, :style => "width:130%;height:100%;margin-bottom: 7%;border: solid forestgreen 3px;"%><br>
+         <% if current_user  %>
+                <% unless current_user.contestant_votes.exists?  %>
+              <%= link_to "Vote", vote_contestant_path(contestant, value: 1), method: "post", :class=>"btn btn-success",:style => "width:100%" %>
+            <% end %>
+         <% end %>
+       </div>
+      </li>
+<% end %>
+</ul>
+

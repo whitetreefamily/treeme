@@ -1,0 +1,12 @@
+
+<div id="users">
+  <% for user in @pages %>
+      <div class="user">
+        <p>
+          <strong><%=h user.name %></strong>
+          <%= link_to "Add Friend", branches_path(:page_id => user.id), :method => :post %>
+        <div class="clear"></div>
+        </p>
+      </div>
+  <% end %>
+</div>

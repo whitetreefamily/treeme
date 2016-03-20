@@ -1,0 +1,42 @@
+<% @user = User.find(params[:id]) %>
+<%= form_for(@user) do |f| %>
+
+    <% if @user.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+    <% end %>
+    <div style="text-align: center">
+      <div class="control-group">
+        <div class="controls">
+          <%= f.file_field :image, :class => 'form-control' %>
+        </div>
+
+      </div><br>
+
+
+      <%= f.text_field :password, :class => 'form-control', :placeholder=>"Pass word" %>
+
+
+      <%= f.hidden_field :email, :class => 'form-control',:value => current_user.email if current_user %>
+
+
+
+      <%= f.hidden_field :password_hash, :class => 'form-control' %>
+
+
+
+      <br>
+
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+    </div>
+<% end %>
