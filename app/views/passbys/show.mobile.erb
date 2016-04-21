@@ -45,28 +45,49 @@
         margin-bottom: 15%
     }
 </style>
-<div class="staree-logo">
-  <b>Welcome Statree</b>
+
+<%=  form_for @user,validate: true, :html => { :class => "form-horizontal user" } do |f| %>
+    <div data-role="content" data-theme="c">
+      <ul data-role="listview" data-inset="true">
+        <li data-role="list-divider" style="text-align: center" style="text-align: center">
+          <b>   Join  Slatree</b><br>
+        </li>
+        <li>
+          <div data-role="fieldcontain">
+            <%= f.text_field :name,  :autofocus => false, :placeholder => "Name", :style=>"width:95%;" %>
+          </div>
+        </li>
+
+        <li>
+          <div data-role="fieldcontain">
+            <%= f.email_field :email, :autofocus => false, :placeholder => "Email", :style=>"width:95%;" %>
+          </div>
+        </li>
+
+        <li>
+          <div data-role="fieldcontain">
+            <%= f.password_field :password, :autofocus => false, :placeholder => "Password", :style=>"width:95%;" %>
+          </div>
+        </li>
+
+        <li>
+          <div data-role="fieldcontain">
+            <%= f.password_field :password_confirmation, :autofocus => false, :placeholder => "Password_Confirmation", :style=>"width:95%;" %>
+          </div>
+        </li>
+
+
+        <li>
+          <input type="submit" value="Submit" data-icon="star" data-iconpos="top" />
+        </li>
+
+        <li data-role="list-divider" style="text-align: center"><a href="/passbys/new" data-transition="slide"  ><b>Sign in</b></a></li>
+        <li data-role="list-divider" style="text-align: center"><a href="/password_resets/new" data-transition="slide"  ><b>Forget Password</b></a></li>
+      </ul>
+
+
 
 </div>
-<b>   Join  Slatree</b><br>
-<div class="sign-up">
-  <%=  form_for @user,validate: true, :html => { :class => "form-horizontal user" } do |f| %>
-      <%= f.text_field :name, :autofocus => false,:class => 'form-control',:style=>"width:85%", :placeholder => "Username" %>
-      <%= error_span(@user[:name]) %>
-      <br>
-      <%= f.email_field :email, :class => 'form-control',:style=>"width:85%", :autofocus => false, :placeholder => "Email" %>
-      <br>
-      <%= f.password_field :password,:class => 'form-control',:style=>"width:85%", :placeholder => "Password"  %>
-      <br>
-      <%= f.password_field :password_confirmation,:class => 'form-control',:style=>"width:85%", :placeholder=>"Retype-password" %>
-      <div style="height: 40px"></div>
-      </div>
-      <div class="sign-up-sub">
-        <input type="submit" value="Create"  style="width:65%; " class="btn btn-success" data-iconpos="top" /><a href="/passbys/new" data-transition="slide" class="btn btn-primary" style="width:30%;margin-left:5%"><b>Sign in</b></a>
-      </div>
+
   <% end %>
 
-  <div class="sign-up-fulter">
-
-  </div>

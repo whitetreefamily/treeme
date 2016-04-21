@@ -1,0 +1,29 @@
+
+<%= form_for(current_user) do |f| %>
+    <div data-role="content" data-theme="c">
+      <ul data-role="listview" data-inset="true">
+        <li data-role="list-divider" style="text-align: center" style="text-align: center">
+          Change Avatar
+        </li>
+        <li>
+          <div data-role="fieldcontain" style="text-align: center">
+            <label for="new_user_username" > Image Only</label>
+            <%= f.file_field :image,  :style=>"text-align: center;position:relative;left:20%"%>
+          </div>
+        </li>
+
+
+        <%= current_user.id %>
+
+
+
+
+        <%= f.hidden_field :password_hash, :class => 'form-control' %>
+
+        <li>
+          <%= f.submit "Submit"%>
+        </li>
+      </ul>
+    </div>
+<% end %>
+

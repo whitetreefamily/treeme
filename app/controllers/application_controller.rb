@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   helper_method :advert
   helper_method :game
   helper_method :current_user
+  helper_method :current_admin
+
   helper_method :caculate_user
 
 
@@ -38,5 +40,9 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
+  end
+
+  def current_admin
+    @current_admin ||= Admin.find(session[:admin_id]) if session[:admin_id]
   end
 end

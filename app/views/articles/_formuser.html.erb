@@ -22,7 +22,7 @@
         <div class="controls">
           <%= f.text_area :body, :class => 'form-control', label: "Enter text", :placeholder =>"Enter text",:style=>"height:200px"  %>
         </div>
-        <%= error_span(@article[:body]) %>
+
       </div>
 
       <div class="control-group">
@@ -38,12 +38,13 @@
         <div class="controls">
           <%= f.file_field :image, :class => 'form-control' %>
         </div>
-        <%= error_span(@article[:image]) %>
+
       </div>
 
 
-
       <%= f.hidden_field :page_id  %>
+
+
 
 
       <%= f.submit nil, :class => 'btn btn-primary' %>

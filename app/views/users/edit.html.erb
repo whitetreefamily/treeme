@@ -43,7 +43,13 @@
     <div class="normal-body2">
       <% for friendship in @user.pages %>
           <ul  class="list-body-show-sub">
-            <li><%= link_to image_tag(friendship.image_url.to_s, :class=>"img-circle", :width=>"25px;",:height=>"25px;", ), friendship%>   <%= link_to  friendship.name,friendship%></li>
+            <li>
+              <% if friendship.image.present? %>
+                  <%= link_to image_tag(friendship.image_url.to_s, :class=>"img-circle", :width=>"25px;",:height=>"25px;", ), friendship%>
+              <% else %>
+                  <%= link_to image_tag("TREEEEEE.jpg", :class=>"img-circle", :width=>"25px;",:height=>"25px;", ), friendship%>
+              <% end %>
+              <%= link_to  friendship.name,friendship%></li>
             <li><%= link_to "Delete "'<i class="glyphicon glyphicon-tower"></i>'.html_safe, friendship, :class=>"btn btn-success btn-xs",:style => " text-decoration:none;color:#000", :method => :delete %></li>
           </ul>
       <% end %>
@@ -52,9 +58,17 @@
 
     </div>
     <div class="normal-body2">
-      <div class="list-body-show">
-        <a href="#"  data-toggle="modal" data-target="#modal-delete"><b style="color: #0074d9" class="btn btn-default"> Am Not Happy </b></a>
-      </div>
+      <% if current_user.id   ==   @user.id %>
+          <div class="list-body-show">
+            <a href="#"  data-toggle="modal" data-target="#modal-delete"><b style="color: #0074d9" class="btn btn-default"> Am Not Happy </b></a>
+          </div>
+      <% elsif current_user.admin.present? %>
+          <% if  current_user.admin.change == true %>
+              <div class="list-body-show">
+                <a href="#"  data-toggle="modal" data-target="#modal-delete"><b style="color: #0074d9" class="btn btn-default"> Am Not Happy </b></a>
+              </div>
+         <% end %>
+      <% end %>
     </div>
 
   </div>
@@ -79,17 +93,14 @@
               </div>
           <% end %>
           <div style="text-align: center;margin-top: 6%" >
+            <% if current_user.change == true %>
             <div class="control-group">
 
               <div class="controls">
-                <%= f.text_field :name, :class => 'form-control', :label =>" Username" %>
+                <%= f.text_field :change, :class => 'form-control', :label =>" Username" %>
               </div>
-              <%= error_span(@user[:name]) %>
             </div>
-
-
-
-
+             <% end %>
             <%= f.hidden_field :password_hash, :class => 'form-control' %>
 
             <%unless @user.categories.present?  %>
@@ -105,27 +116,14 @@
                 </div>
             <% end %>
             <br>
-
-
             <div class="controls">
               <%= f.text_area :bio, :class => 'form-control',:label =>" What about you", :placeholder=>"Enter Bio",:style=>"width:100%;height:110px" %>
             </div>
-
-
-
-
-
-
-
             <%= f.submit nil, :class => 'btn btn-primary' %>
             <a href="#"  data-toggle="modal" data-target="#modal-<%= @user.id %>"><b style="color: #0074d9" class="btn btn-default"> More option </b></a>
 
       <% end %>
       <hr>
-
-
-
-
       </div>
 
 

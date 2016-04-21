@@ -41,6 +41,17 @@
           <button type="button" id="flip1" class="btn btn-warning btn-sm"> Add post <span style="font-size:1.2em;" class="glyphicon glyphicon-pencil"></span></button>
         </li>
       </ul>
+        <% elsif current_user.admin.present? %>
+              <% if  current_user.admin.change == true %>
+              <ul class="article-link">
+                <li>
+                  <a data-toggle="modal" href="#myModal"> <button  type="button" class="btn btn-warning btn-sm"> Edit Blog </button> </a>
+                </li>
+                <li>
+                  <button type="button" id="flip1" class="btn btn-warning btn-sm"> Add post <span style="font-size:1.2em;" class="glyphicon glyphicon-pencil"></span></button>
+                </li>
+              </ul>
+             <% end %>
        <% else %>
               <ul class="article-link">
                 <li>
@@ -81,10 +92,12 @@
       <% @users = current_user.id if current_user %>
           <div class="natice-body">
             <% if current_user %>
+                <% unless Branch.friendship_exists?(current_user, @page )%>
                 Have you   <%= link_to '<i class="glyphicon glyphicon-leaf"></i>&nbspBranch in'.html_safe, branches_path(:user_id => @users, :check => @check, :page_id => @page.id), :class=>"btn btn-primary btn-sm",:style => " text-decoration:none ;",:method => :post %>
-              <% else %>
-                To Branch In  <%= link_to '<i class="glyphicon glyphicon-leaf"></i>&nbspSign Up '.html_safe, welcome_index_path,:class=>"btn btn-primary btn-sm"%>
-            <%end%>
+                <% else %>
+                Thank you for branching
+               <%end%>
+           <% end %>
           </div>
     </div>
     <div class="list-group">
@@ -98,7 +111,8 @@
   </div>
 </div>
 
-
+<% if current_user %>
+    <% if current_user.id   ==   @page.user.id  %>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -114,3 +128,5 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+   <% end %>
+<% end %>

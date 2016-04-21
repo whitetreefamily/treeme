@@ -53,6 +53,17 @@
               <% @user = current_user if current_user %>
               <li><%= link_to '<i class="glyphicon glyphicon-leaf" style="font-size:1.0em;color:forestgreen"></i>&nbspLeafs'.html_safe, users_path %> </li>
               <li class="divider"></li>
+              <% if current_user.change == true %>
+               <% if current_admin %>
+                      <% @admin = current_user.admin(params[:id]) %>
+                      <li><%= link_to '<i class="glyphicon glyphicon-heart" style="font-size:1.0em;color:forestgreen"></i>&nbspAdmin'.html_safe, current_admin %> </li>
+                      <li class="divider"></li>
+                <% else %>
+
+                      <li><%= link_to '<i class="glyphicon glyphicon-heart" style="font-size:1.0em;color:forestgreen"></i>&nbspAdmin'.html_safe, new_admin_session_path %> </li>
+                      <li class="divider"></li>
+               <% end %>
+            <% end %>
               <li>
                 <% if current_user %>
                     <%= link_to '<i class="glyphicon glyphicon-off" style="font-size:1.0em;color:forestgreen"></i>&nbspLogout'.html_safe, log_out_path%>

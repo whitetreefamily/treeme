@@ -1,0 +1,29 @@
+<style type="text/css">
+    .normal-body{
+        width:98%;
+        background: #fff;
+        padding: 0.7px;
+        padding-top: 4px;
+        text-align: center;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        font-family: 'Open Sans Light', sans-serif;
+        margin-bottom: 2%;
+        position: relative;
+    }
+</style>
+
+<div style="position: relative;left: 1%;margin-top: 1%">
+  <div class="normal-body">
+    <h3><%= @page.name %> edit tree</h3>
+  </div>
+  <%= form_for @page, :html => { :class => "form-horizontal page" } do |p| %>
+      <%= p.hidden_field :user_id, :class => 'form-control', :value=> current_user.id if current_user %>
+      <br>
+      <%= p.text_field :name, hide_label: true, placeholder: "Enter New name", class: "input-lg required" %>
+      <br>
+      <%= p.number_field :page_no, hide_label: true, placeholder: "Enter a New Password", class: "input-lg required" %>
+      <br>
+
+      <%= p.submit "Change Password", :class=> "btn btn-primary" %>
+  <% end %>
+</div>

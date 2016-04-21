@@ -45,24 +45,37 @@
         margin-bottom: 20%
     }
 </style>
-<div class="staree-logo">
-      <b>Welcome Statree</b><br>
-</div>
-<div class="sign-up">
+<%= form_tag  passbys_path do %>
+<div data-role="content" data-theme="c">
+  <ul data-role="listview" data-inset="true">
+    <li data-role="list-divider" style="text-align: center" style="text-align: center">
+      Sign in to Slatree
+    </li>
 
-   <%= form_tag  passbys_path do %>
-          <%= text_field_tag :email, params[:email], :class => 'form-control',:style=>"width:80%",:placeholder => "Email"%>
-       <br>
-         <%= password_field_tag :password, params[:password],:style=>"width:80%", :class => 'form-control',:placeholder => "Password"%>
 
-  <div style="height: 20px"></div>
-</div>
-  <div class="sign-up-sub">
-    <input type="submit" value="Login"  style="width:100%; " class="btn btn-success" data-iconpos="top" />
-  </div>
+
+    <li>
+      <div data-role="fieldcontain">
+        <%= email_field_tag :email, params[:email], :autofocus => false, :placeholder => "Email", :style=>"width:95%;" %>
+      </div>
+    </li>
+
+    <li>
+      <div data-role="fieldcontain">
+        <%= password_field_tag :password, params[:password], :autofocus => false, :placeholder => "Password", :style=>"width:95%;" %>
+      </div>
+    </li>
+
+
+
+    <li>
+      <input type="submit" value="Submit" data-icon="star" data-iconpos="top" />
+    </li>
+
+    <li data-role="list-divider" style="text-align: center"><a href="/passbys/show" data-transition="slide"  ><b>Create A New Account</b></a></li>
+    <li data-role="list-divider" style="text-align: center"><a href="/password_resets/new" data-transition="slide"  ><b>Forget Password</b></a></li>
+  </ul>
 <% end %>
 
-  <div class="sign-up-fulter">
-    <a href="/password_resets/new" ><b>Forget Password</b></a>
-        <a href="/passbys/show" data-transition="slide" class="btn btn-primary" style="width:50%;margin-left:5%"><b>Create new Account</b></a>
-  </div>
+
+</div>

@@ -1,0 +1,33 @@
+<div class="index-user-all">
+  <div class="index-body-input">
+    <div class="index-list-body">
+      <h3> <b>Suggestions</b></h3>
+      More Trees in the Forest
+    </div>
+    <div  class="qf b aml" style="height: 50px">
+      <%= form_tag pages_path, :class=>"navbar-search pull-left", :method => :get do %>
+          <div class="input-group">
+        <span class="input-group-btn">
+           <%= submit_tag "Search Tree", :name=> nil,:class=>"btn btn-success" %>
+        </span>
+            <%= text_field_tag :search, params[:search], :class=>"form-control", :placeholder=> "Enter Tree name",:style=>"width:400px" %>
+      <% end %>
+      </div><!-- /input-group -->
+    </div>
+  </div>
+
+  <div id="products">
+    <%= render "pages/page" %>
+  </div>
+
+  <%= will_paginate @pages%>
+</div>
+
+
+
+<div class="index-list-body1">
+  <%= render "pages/caro" %>
+</div>
+
+
+

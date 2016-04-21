@@ -1,0 +1,31 @@
+
+<%=form_for @article,   :html => { :class => "form-horizontal user" } do |f| %>
+    <div data-role="content" data-theme="c">
+      <ul data-role="listview" data-inset="true">
+        <li data-role="list-divider" style="text-align: center" style="text-align: center">
+          Create a post
+        </li>
+        <li>
+          <div data-role="fieldcontain" style="text-align: center">
+            <%= f.text_area :body, :type=>" textarea", hide_label: true, placeholder: "Enter Text", class: "input-lg required" %>
+          </div>
+
+          <%= f.file_field :image, :class => 'form-control' %>
+
+          <%= f.collection_select :category_id, Category.all, :id, :name %>
+        </li>
+
+        <%= f.hidden_field :user_id, :class => 'form-control', :value=> current_user.id if current_user%>
+
+        <li>
+
+
+          <%= f.hidden_field :page_id  %>
+
+
+          <%= f.submit " Create Post", :class => 'btn btn-primary' %>
+        </li>
+      </ul>
+    </div>
+<% end %>
+

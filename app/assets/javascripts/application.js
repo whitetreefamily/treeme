@@ -11,11 +11,10 @@
 // about supported directives.
 //
 //= require rails.validations
-//= require bootstrap
+//= require admin/bootstrap.js.coffee
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require turbolinks
-//= require_tree .
+//= require_directory .
 
 

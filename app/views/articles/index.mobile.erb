@@ -1,16 +1,27 @@
+<script>
+    (function() {
 
+        $(window).on('scroll', function() {
+            if ($('.pagination').length) {
+                this.url = $('.pagination .next_page').attr('href');
+                if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
+                    $('.pagination').remove();
+                    $('#posts').append('<div>');
+                    return $('#posts div').last().load(this.url + ' #posts', function() {
+                        if ($('.next_page.disabled').length) return $('.pagination').remove();
+                    });
+                }
+            }
+        });
+
+    }).call(this);
+</script>
 
   <div class="normal-body">
-    <table style="width:100%">
-      <tr>
-        <td><a href="/categories/News" class="btn btn-success btn-xs" >News</a></td>
-        <td><a href="/categories/Fashion" class="btn btn-success btn-xs">Fashion</a></td>
-        <td><a  href="/categories/Music" class="btn btn-success btn-xs">Music</a></td>
-        <td><a href="/categories/Thread" class="btn btn-success btn-xs">Thread</a></td>
-        <td><a data-toggle="modal" href="#myModal" class="btn btn-success btn-xs btn-lg">More</a></td>
-      </tr>
-    </table>
-          <div style="text-align: center"><b>Welcome To State tree Forest</b></div>
+    <ul data-role="listview" data-inset="true">
+      <li style="width: 80%">  <%=link_to "More categories", categories_path %></li>
+    </ul>
+          <div style="text-align: center;"><b><h4>Welcome To State tree Forest</h4></b></div>
     </div>
 
 <div id="posts">

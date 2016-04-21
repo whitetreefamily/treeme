@@ -1,19 +1,16 @@
 
 <style type="text/css">
  .reset-password{
-     width: 105%;
+     width: 98%;
       background: #fff;
      padding: 0.7px;
      padding-top: 4px;
      text-align: center;
      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
      font-family: 'Open Sans Light', sans-serif;
-     margin-bottom: 10%;
-     margin-top: 20%;
+     margin-bottom: 3%;
      position: relative;
-     right: 2%;
-     color: forestgreen;
-
+     left: 1%;
  }
  .reset-password-sub{
      width: 105%;
@@ -26,7 +23,6 @@
      margin-top: 20%;
      position: relative;
      right: 2%;
-     color: forestgreen;
  }
 </style>
 <div class="reset-password">
@@ -34,15 +30,29 @@
           Enter your email
 </div>
 <%= form_tag password_resets_path,  :method => :post do %>
-    <div class="field">
-      <%= text_field_tag :email, params[:email] , :class => 'form-control',:placeholder =>"Your email", :label =>"Your email"%>
-    </div>
-    <br>
-    <div class="actions"><%= submit_tag "Reset Password", :class => 'btn btn-success',:style=>"width:100%" %></div>
-<% end %>
+<div data-role="content" data-theme="c">
+  <ul data-role="listview" data-inset="true">
+    <li data-role="list-divider" style="text-align: center" style="text-align: center">
+      Sign in to Slatree
+    </li>
 
-<div class="reset-password-sub">
-  Or type in your username and we’ll do our best to help:
-  send to Slatree email
+
+    <li>
+      <div data-role="fieldcontain">
+        <%= text_field_tag :email, params[:email] , :class => 'form-control',:placeholder =>"Your email", :label =>"Your email"%>
+      </div>
+    </li>
+
+
+
+    <li>
+      <input type="submit" value="Submit" data-icon="star" data-iconpos="top" />
+    </li>
+    <li data-role="list-divider" style="text-align: center"><a href="/passbys/new" data-transition="slide"  ><b>Sign in </b></a></li>
+    <li data-role="list-divider" style="text-align: center"><a href="/passbys/show" data-transition="slide"  ><b>Create A New Account</b></a></li>
+
+  </ul>
+  <% end %>
+
+
 </div>
-<div style="height: 185px"> </div>

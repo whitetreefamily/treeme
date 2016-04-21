@@ -12,16 +12,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def image
+    @user = User.find(params[:id])
+  end
   # GET /users/1
   # GET /users/1.json
   def show
     @page = Page.new
-
-
       ids = current_user.pages.pluck(:id) << current_user.id
        @articles = Article.where(page_id: ids).page(params[:page]).per_page(3).order('created_at DESC')
       @pages = Page.all.order(:created_at => :desc).page(params[:page]).per_page(8)
-
+     if @user.admin.present?
+    else
+      create_add
+    end
   end
   # GET /users/form
   def form
@@ -35,8 +39,6 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @pages = Page.all.order(:created_at => :desc).page(params[:page]).per_page(8)
-
-
   end
 
   # POST /users
@@ -51,6 +53,16 @@ class UsersController < ApplicationController
         format.html { redirect_to root_path, notice: 'Sign up was not successful,' }
         format.mobile { redirect_to root_path ,notice: 'Sign up was not successful,'}
       end
+    end
+  end
+
+
+  def create_add
+     if current_user.change == true
+       @user.create_admin
+       Admin.new(:user_id => params[:user_id])
+    else
+
     end
   end
 
@@ -82,7 +94,9 @@ class UsersController < ApplicationController
 
   def change_password
     @user = current_user
-    current_password = params[:user][:current_password]
+    conform_password = params[:user][:password_confirmation]
+     current_password = params[:user][:current_password]
+      if    current_password == conform_password
     user = User.authenticate(@user.email, current_password)
     if @user && user
       # @user.update.password = params[:new_password]
@@ -94,8 +108,12 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     else
       flash[:danger] = "Your old password was incorrect. Please try again."
-      redirect_to user_path(current_user)
+      redirect_to @current_user
     end
+      else
+        flash[:danger] = "No password confirmation or  Your old password was incorrect "
+        redirect_to @current_user
+      end
   end
 
 
@@ -111,13 +129,13 @@ class UsersController < ApplicationController
 
   def correct_user
     @user = User.find(params[:id])
-     unless   @user.id == current_user.id
+     unless   @user.id == current_user.id || cu
           redirect_to current_user
       end
   end
 
   def change_password_params
-    params.require(:user).permit(:password)
+    params.require(:user).permit(:password,:password_confirmation)
   end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -127,6 +145,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password_confirmation, :password,:image,:bio,:sex, :category_ids => [], :page_ids => [])
+      params.require(:user).permit(:name, :email, :password_confirmation,:birthday, :password,:image,:bio,:sex, :category_ids => [], :page_ids => [])
     end
 end

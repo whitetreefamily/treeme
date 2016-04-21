@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
 
-
-
-  get 'password_resets/new'
-
+  get 'admin_sessions/admin_tree'
+  get 'admin_sessions/admin_user'
+  get 'admin_sessions/admin_category'
+  get 'admin_sessions/new'
+  resources :admin_sessions
+  resources :admins
+  get 'change_admin' => 'admins#change_admin'
+  patch 'change_admin' => 'admins#change_admin'
+  get 'admins/password'
+  resources :infos
   get "/404" => "errors#not_found"
   get "/500" => "errors#internal_server_error"
 
@@ -20,20 +26,21 @@ Rails.application.routes.draw do
   end
 
   resources :comments
-  resources :comments
   resources :categories
 
   resources :pages do
     member do
       get 'vote'
+      get 'delete_page'
     end
   end
-
+  get 'pages/page_info'
   resources :articles do
     resources :comments
   end
 
   resources :contestants
+  get "admin_out" => "admin_sessions#destroy", :as => "admin_out"
   get "log_out" => "passbys#destroy", :as => "log_out"
   get "log_in" => "passbys#form", :as => "log_in"
   get "sign_up" => "users#form", :as => "sign_up"
@@ -46,16 +53,25 @@ Rails.application.routes.draw do
       get :confirm_email
     end
   end
-
+  get 'user_setting/suggestion'
+  get 'user_setting/image'
+  get 'user_setting/password'
+  get 'user_setting/tree'
+  get 'user_setting/branching'
+  get 'user_setting/index'
+  resources :password_resets
   get 'change_password' => 'users#change_password'
   patch 'change_password' => 'users#change_password'
 
+  get 'welcome/image'
   get 'welcome/tour'
   get 'welcome/meta'
   get 'welcome/index'
   get "welcome/show"
   root 'welcome#index'
-  resources :password_resets
+  get 'welcome/goodbey50007'
+  get 'admins/admin_branch'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

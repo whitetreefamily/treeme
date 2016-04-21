@@ -1,27 +1,72 @@
 class CommentsController < ApplicationController
-  before_action :load_article
+  before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
+  # GET /comments
+  # GET /comments.json
+  def index
+    @comments = Comment.all
+  end
+
+  # GET /comments/1
+  # GET /comments/1.json
+  def show
+  end
+
+  # GET /comments/new
+  def new
+    @comment = Comment.new
+  end
+
+  # GET /comments/1/edit
+  def edit
+  end
+
+  # POST /comments
+  # POST /comments.json
   def create
-    @comment = @article.comments.new(comment_params)
-    if @comment.save
-      redirect_to @article, notice: 'You just commented on this post'
-    else
-      redirect_to @article, alert: 'Unable to add comment, Text can be Balk'
+    @comment = Comment.new(comment_params)
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @comment.article, notice: 'You just add a comment to this post' }
+        format.mobile { redirect_to current_user, notice: 'You just add a comment to this post' }
+      else
+        format.html { redirect_to @comment.article, notice: 'No comment  ' }
+        format.mobile { render :show, status: :ok, location: @comment }
+      end
     end
   end
 
-  def destroy
-    @comment = @article.comments.find(params[:id])
-    @comment.destroy
-    redirect_to @article, notice: 'Comment Deleted'
+  # PATCH/PUT /comments/1
+  # PATCH/PUT /comments/1.json
+  def update
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.json { render :show, status: :ok, location: @comment }
+      else
+        format.html { render :edit }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
   end
+
+  # DELETE /comments/1
+  # DELETE /comments/1.json
+  def destroy
+    @comment.destroy
+    redirect_to @comment.article
+  end
+
+
 
   private
-  def load_article
-    @article = Article.find(params[:article_id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
 
+  # Never trust parameters from the scary internet, only allow the white list through.
   def comment_params
-    params.require(:comment).permit(:name,  :email, :body, :user_id)
+    params.require(:comment).permit(:name,  :email, :article_id,:body, :user_id)
   end
 end

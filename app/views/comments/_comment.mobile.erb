@@ -1,3 +1,4 @@
+
 <div class="comment-show">
   <div class="comment-sub">
     <div class="comment-sub1">
@@ -8,11 +9,12 @@
       <% end %>
     </div>
     <div class="comment-sub2">
-      <b style="margin-right: 44%; color: forestgreen">  <%= comment.user.name %></b><%= time_ago_in_words(comment.created_at) %><br>
-      <p style="color: #2882b5"><%= comment.body %></p>
+      <b style="margin-right: 44%;font-size: 120%" >  <%= comment.user.name %></b><%= time_ago_in_words(comment.created_at) %><br>
+      <p style="color: forestgreen;font-size: 110%"><%= comment.body %></p>
     </div>
 
   </div>
 
 </div>
+
 <hr style="color: forestgreen">

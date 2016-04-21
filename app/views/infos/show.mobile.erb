@@ -1,0 +1,67 @@
+<style type="text/css">
+    .normal-list-body{
+        width: 100%;
+        height: auto;
+        background: #fff;
+        padding: 3px;
+        padding-top: 2%;
+        text-align: center;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        font-family: 'Open Sans Light', sans-serif;
+        position: relative;
+    }
+    .table1{
+        position: relative;
+        left: 6.3%;
+    }
+    .table1,th,td
+    {
+        border:1px solid forestgreen;
+    }
+
+</style>
+<div class="normal-list-body">
+  <h4><b style="color:forestgreen">  Tree Info</b></h4>
+</div>
+
+<div class="normal-list-body">
+  <table class="table1" border="1" style="width:85%">
+    <tr>
+      <td><h5><b>Branched</b></h5></td>
+      <td><h5><b><%= @info.page.branches.count %></b></h5></td>
+    </tr>
+    <tr>
+      <td><h5><b>View</b></h5></td>
+      <td><h5><b><%=@info.page.views %></b></h5></td>
+
+    </tr>
+    <tr>
+      <td><h5><b>Tree post</b></h5></td>
+      <td><h5><b><%=@info.page.articles.count %></b></h5></td>
+
+    </tr>
+    <tr>
+      <% if current_user %>
+      <td><h5><b>Tree own</b></h5></td>
+      <td><h5><b><%=link_to  @info.page.user.name, @info.page.user %></b></h5></td>
+      <% else %>
+          <td><h5><b>Tree own</b></h5></td>
+          <td><h5><b><%=  @info.page.user.name %></b></h5></td>
+      <% end %>
+    </tr>
+  </table>
+  <% @page   =  @info.page %>
+  <br>
+  <ul data-role="listview" data-inset="true">
+    <% if current_user %>
+        <% if   @info.page.user_id == current_user.id  %>
+    <li style="margin-bottom: 2%">  <%=link_to "Edit Your Tree", edit_page_path(@page) %></li>
+          djkggpbs gb sfdgopb pofdsg bjosfdgb sd gbpsd gbj sei eruig etig sudp
+            sdffhb dgb fdsgb spg bsr tgbbuseit si bus us,itb sdgb ishe se igue g
+            ddlbget se  di
+    <li style="margin-top: 10%">   <%= link_to 'Next ', delete_page_page_path(@page), :class=>"btn btn-danger",  data: { confirm: 'Are you sure?' } %></li>
+        <% end %>
+    <% end %>
+  </ul>
+
+</div>

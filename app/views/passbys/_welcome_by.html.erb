@@ -9,6 +9,6 @@
         <%=submit_tag  "Log in",:class => 'btn btn-success', :style =>"width:70%"%>
       </div>
       <%= check_box_tag :remember_me, 1, params[:remember_me] %>
-      <%= label_tag :remember_me %>    <%= link_to "forgotten password?", password_resets_new_path %>
+      <%= label_tag :remember_me %>  <a href="/password_resets/new" data-transition="slide"  ><b>Forget Password</b></a>
   <% end %>
 </div>

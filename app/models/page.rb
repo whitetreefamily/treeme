@@ -1,9 +1,10 @@
 class Page < ActiveRecord::Base
+  has_one :info, :dependent => :destroy
   has_one :vote_page
   mount_uploader :image, ImageUploader
   has_many :articles,  :dependent => :destroy
   extend FriendlyId
-  friendly_id :name, :use => [:finders]
+  friendly_id :name, use: :slugged
   has_many :branches, :dependent => :destroy
   has_many :users, :through => :branches ,:dependent => :destroy
   belongs_to :user
@@ -13,6 +14,7 @@ class Page < ActiveRecord::Base
     self.views += by
     self.save
   end
+
 
   def toter_page
     Page.select('pages.*, max(branches.id) as last_commented_at').

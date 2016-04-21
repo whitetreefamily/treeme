@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318193339) do
+ActiveRecord::Schema.define(version: 20160413190754) do
+
+  create_table "admins", force: :cascade do |t|
+    t.boolean  "check",         default: false
+    t.integer  "user_id"
+    t.string   "username"
+    t.string   "password"
+    t.string   "password_hash"
+    t.string   "users"
+    t.string   "password_salt"
+    t.string   "position"
+    t.boolean  "change",        default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -80,6 +94,13 @@ ActiveRecord::Schema.define(version: 20160318193339) do
     t.integer  "vote_page_id"
   end
 
+  create_table "infos", force: :cascade do |t|
+    t.integer  "page_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string   "name"
     t.integer  "page_no"
@@ -89,7 +110,10 @@ ActiveRecord::Schema.define(version: 20160318193339) do
     t.datetime "updated_at", null: false
     t.integer  "views"
     t.text     "body"
+    t.string   "slug"
   end
+
+  add_index "pages", ["slug"], name: "index_pages_on_slug"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -107,6 +131,8 @@ ActiveRecord::Schema.define(version: 20160318193339) do
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.string   "auth_token"
+    t.date     "birthday"
+    t.boolean  "change",                 default: false
   end
 
   create_table "vote_pages", force: :cascade do |t|

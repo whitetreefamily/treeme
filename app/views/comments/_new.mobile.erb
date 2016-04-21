@@ -1,0 +1,23 @@
+<%= form_for(@comment) do |f| %>
+
+
+    <%= f.hidden_field :user_id, :class => 'form-control', :value => current_user.id if current_user %>
+
+    <%= f.hidden_field :article_id, :class => 'form-control' %>
+
+
+    <div class="control-group">
+      <%= f.text_area :body, :class => 'form-control', :placeholder=>"Enter Comment" ,:style=>"width:98%;position:relative;left:1%;  height: 40px;" %>
+    </div>
+
+    <table style="position: relative;right: 5%;width: 100%">
+      <tr>
+        <td>
+          <% if current_user.name.present? %>
+              <b style="margin-left: 6px"><%= current_user.name%> </b>
+          <% end %>
+        </td>
+        <td >   <%= f.submit "Add Comment",  :type=>"submit", :style=>"width:100% ;" %> </td>
+      </tr>
+    </table>
+<%end%>

@@ -8,8 +8,13 @@
   <% end %>
   </div>
      <%= comment.body %>
-  <% if current_user   && comment.user_id     ==   current_user.id %>
+  <% if current_user   && comment.user_id     ==   current_user.id   %>
       |<%= link_to 'Delete', article_comment_path(:article_id => @article,  :id => comment), confirm: 'Are you sure?', method: :delete,  :style => "color:goldenrod" %>
+  <% elsif current_user.admin.present? %>
+      <% if  current_user.admin.change == true %>
+          |<%= link_to 'Delete', article_comment_path(:article_id => @article,  :id => comment), confirm: 'Are you sure?', method: :delete,  :style => "color:goldenrod" %>
+       <% end %>
+
   <% end %>
   <div style="height: 8px"></div>
 </div>

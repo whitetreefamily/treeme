@@ -1,4 +1,6 @@
-<%= form_for([@article, @article.comments.new]) do |f| %>
+<%= form_for(@comment) do |f| %>
+
+
 
               <ul>
                 <% @article.errors.full_messages.each do |msg| %>
@@ -7,15 +9,15 @@
               </ul>
 
 
+                <%= f.text_field :article_id, :class => 'form-control' %>
 
               <%= f.hidden_field :user_id, :class => 'form-control', :value => current_user.id if current_user %>
-
 
 
                 <div class="control-group">
                   <%= f.text_area :body, :class => 'form-control', :placeholder=>"Text" %>
                 </div>
-                <%= error_span(@article[:body]) %>
+               >
 
                   <br>
 

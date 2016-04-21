@@ -1,0 +1,160 @@
+<% @tree = Page.all.count %>
+<% @category = Category.all.count %>
+<% @user = User.all.count %>
+<% @branch = Branch.all.count %>
+<style>
+    .table1,th,td
+    {
+        border:1px solid forestgreen;
+        border-collapse:collapse
+
+    }
+</style>
+<%if current_admin %>
+<div style="margin-top: 30px">
+<div class="admin-user">
+ <div class="admin-user-sub">
+   <div class="admin-body-image">
+     <div class="admin-body-image-sub">
+       <%if @admin.user.image.present? %>
+         <%= image_tag( @admin.user.image_url.to_s,:width=>"85%;",:class=>"img-thumbnail") %>
+       <% else %>
+           <%= image_tag( "tree.png",:width=>"85%;",:class=>"img-thumbnail") %>
+       <% end %>
+     </div>
+     <div class="admin-body-image-sub1">
+         <div><h5 style="float: left">Admin name : <b><%=@admin.user.name %></b></h5></div>
+       <div style="margin-bottom: 10px"><h5 style="float: left">Position : <b><%=@admin.position %></b></h5></div>
+       <div><h5 style="float: left">Admin name : <b><%=@admin.username %></b></h5></div>
+     </div>
+   </div>
+
+ </div>
+  <div class="admin-user-right">
+     <h2><b>Slate Home</b></h2>
+
+      <%= link_to 'Edit Admin', edit_admin_path(@admin), :class=>"btn btn-default" %>
+  </div>
+</div>
+<div class="admin-user-link">
+  <nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><b>Admin Links</b></a>
+
+      <a class="navbar-brand" href="/admins" style="color: forestgreen"><b>All admin</b></a>
+
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_admin %>
+            <li> <%= link_to '<i class="glyphicon glyphicon-off" style="font-size:1.0em;color:forestgreen"></i>&nbspAdmin Logout'.html_safe, admin_out_path,:class=>"btn btn-default"%></li>
+        <%end %>
+
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+    <table class="table1">
+      <tr style="margin-bottom: 50px">
+        <td style="width:65%;">
+          <ul class="nav nav-pills nav-stacked">
+            <li class="active">
+                <%= link_to "All user "'<span class="badge pull-right"><b> > </b></span>'.html_safe, admin_sessions_admin_user_path(@admin)%>
+            </li>
+          </ul>
+      </td>
+        <td style="width: 400px"><b>Total: <%= @user %></b></td>
+      </tr>
+      <tr style="margin-top:10% ">
+        <td style="width:65%">
+          <ul class="nav nav-pills nav-stacked">
+            <li class="active">
+              <%= link_to "All Tree "'<span class="badge pull-right"><b> > </b></span>'.html_safe, admin_sessions_admin_tree_path(@admin)%>
+            </li>
+          </ul>
+        </td>
+        <td style="width: 400px"><b>Total: <%= @tree %></b></td>
+      </tr>
+      <tr style="margin-top:10% ">
+        <td style="width:65%">
+          <ul class="nav nav-pills nav-stacked">
+            <li class="active">
+              <%= link_to "All Categories "'<span class="badge pull-right"><b> > </b></span>'.html_safe, admin_sessions_admin_category_path(@admin)%>
+            </li>
+          </ul>
+        </td>
+        <td style="width: 400px"><b>Total:  <%= @category %></b></td>
+      </tr>
+    </table>
+
+</div>
+
+<div class="admin-user-count">
+  <div class="admin-user-count-right">
+   <h1 style="color: forestgreen;font-size: 95px"><b><%= @branch %></b></h1>
+    <h1><b>Branching ing</b></h1>
+  </div>
+   <div class="admin-user-count-sub">
+     <h1 style="color: forestgreen;font-size: 95px"><b><%= @user %></b></h1>
+     <h1><b>Users</b></h1>
+   </div>
+
+</div>
+</div>
+    <%elsif current_user.admin.username.present? %>
+
+        <div class="session-body">
+          <h2 class="form-signin-heading">Please sign as Admin</h2>
+          <%= form_tag admin_sessions_path do %>
+              <%= text_field_tag :username, params[:username], :type=>"text", :class=>"form-control" , :placeholder=>"Type reg nober", :value => current_user.name if current_user.name   %>
+              <br>
+              <label class="checkbox">
+                <%= text_field_tag :password, params[:password], :type=>"text", :class=>"form-control" , :placeholder=>"Enter password"   %>
+              </label>
+              <%= submit_tag "Sign in", :class=>"btn btn-lg btn-primary btn-block", :type=>"submit"%>
+          <% end %>
+        </div>
+   <% else %>
+
+
+
+
+
+<% end %>
+<%unless current_user.admin.username.present? %>
+    <div class="admin-user">
+      <div class="admin-user-sub">
+        <div class="admin-body-image">
+          <div class="admin-body-image-sub">
+            <%if @admin.user.image.present? %>
+                <%= image_tag( @admin.user.image_url.to_s,:width=>"85%;",:class=>"img-thumbnail") %>
+            <% else %>
+                <%= image_tag( "tree.png",:width=>"85%;",:class=>"img-thumbnail") %>
+            <% end %>
+          </div>
+          <div class="admin-body-image-sub1">
+            <div><h5 style="float: left">Admin name : <b><%=@admin.user.name %></b></h5></div>
+            <div style="margin-bottom: 10px"><h5 style="float: left">Position : <b><%=@admin.position %></b></h5></div>
+            <div><h5 style="float: left">Admin name : <b><%=@admin.username %></b></h5></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="admin-user-right">
+        <h2><b>Slate Home</b></h2>
+
+        <%= link_to 'Edit Admin', edit_admin_path(@admin), :class=>"btn btn-default" %>
+      </div>
+    </div>
+<% end  %>
+

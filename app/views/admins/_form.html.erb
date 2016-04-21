@@ -1,0 +1,40 @@
+
+<%= form_for(@admin) do |f| %>
+  <% if @admin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin.errors.count, "error") %> prohibited this admin from being saved:</h2>
+
+      <ul>
+      <% @admin.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="admin-body-form">
+      <h2 class="form-signin-heading">Change name and Position</h2>
+
+    <div class="field">
+      <%= f.label :username %><br>
+      <%= f.text_field :username, placeholder: "Enter your admin username", :class=>"form-control" %>
+    </div>
+    <div class="field">
+      <%= f.label :position %><br>
+      <%= f.text_field :position, placeholder: "Enter your position", :class=>"form-control" %>
+    </div>
+  <div class="actions">
+    <%= f.submit "Update",:class=> "btn btn-primary" %>
+  </div>
+<% end %>
+</div>
+<%if current_admin %>
+<div class="admin-body-form">
+  <h2 class="form-signin-heading">Change Password</h2>
+<%= bootstrap_form_for @admin, url: change_admin_path do |p| %>
+    <%= p.password_field :current_password, hide_label: true, placeholder: "Enter your Old Password", :class=>"form-control" %>
+    <%= p.password_field :password, hide_label: true, placeholder: "Enter a New Password", :class=>"form-control" %>
+    <%= p.password_field :password_confirmation, hide_label: true, placeholder: "Confirm New Password", :class=>"form-control"%>
+    <%= p.submit "Change Password", :class=> "btn btn-primary" %>
+<% end %>
+</div>
+<% end %>

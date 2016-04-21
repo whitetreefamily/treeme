@@ -1,14 +1,26 @@
 class WelcomeController < ApplicationController
   before_action :authorize_user, only:  [ :index ]
   def index
+    respond_to do |format|
+       @user = User.new
+       @articles = Article.page(params[:page]).per_page(2).order('created_at DESC')
+      format.html
+      format.mobile
+      format.js
+    end
+  end
+  def goodbey50007
     @user = User.new
-    @articles = Article.page(params[:page]).per_page(5).order('created_at DESC')
   end
 
   def show
     @users = User.last
   end
 
+  def image
+    @user = User.find_by(params[:id]) if params[:id].present?
+
+  end
 
   def meta
     @article = Article.new

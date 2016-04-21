@@ -1,0 +1,18 @@
+<%  @user = current_user %>
+
+<div class="edit-list">
+  <div data-role="content" data-theme="c">
+    <ul data-role="listview" data-inset="true" data-counttheme="c">
+      <li data-role="list-divider" style="text-align: center">
+        Your Growing Tree
+      </li>
+      <% for friendship in @user.blog %>
+
+            <li>  <%= link_to  friendship.name, friendship%> <span class="ui-li-count"> <%=  friendship.branches.count%></span> </li>
+      <% end %>
+
+      <li data-role="list-divider" style="text-align: center"> <%= link_to "Grow A Tree", new_page_path%></li>
+    </ul>
+  </div>
+
+</div>

@@ -1,0 +1,78 @@
+<style type="text/css">
+    .normal-body{
+        width: 100%;
+        height: 42px;
+        background: #fff;
+        padding: 3px;
+        text-align: center;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        font-family: 'Open Sans Light', sans-serif;
+        position: relative;
+    }
+    .normal-index{
+        width:20%;
+        height: 20px;
+        float: right;
+        text-align:center;
+        font-size: inherit;
+        margin-top: 1%;
+        position: relative;
+        right: 3%;
+    }
+    .normal-index1{
+        width:130px;
+        height: 60px;
+        text-align: left;
+        padding-left: 2%;
+    }
+    .page-index-mobile{
+        width: 97%;
+        background: #fff;
+        padding: 3px;
+        text-align: center;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+        font-family: 'Open Sans Light', sans-serif;
+        margin-bottom: 2%;
+        margin-top: 2%;
+        position: relative;
+        left: 1.4%;
+    }
+</style>
+<% @user =  current_user.id if current_user %>
+<div class="normal-body">
+  <b>Find Tree</b><br>
+  <span style="font-size:1.2em;color: forestgreen" class="glyphicon glyphicon-tree-deciduous"></span>
+</div>
+<div class="normal-body">
+  <%= form_tag users_path, :class=>"navbar-search pull-left", :method => :get do %>
+      <%= text_field_tag :search, params[:search],  :type=>"search", :id=>"textinput",:style=>"width:100%", :placeholder=> "Enter , branch name"  %>
+  <% end %>
+</div>
+<% @users.each do |page| %>
+    <div class="page-index-mobile">
+      <div class="normal-index">
+        <%=link_to  '<i class="glyphicon glyphicon-eye-open"></i>'.html_safe, page ,:class=>"btn btn-success btn-sm"  %>
+      </div>
+      <div class="normal-index1">
+        <div>
+          <% if page.image.present? %>
+              <%=link_to image_tag(page.image_url.to_s,:class=>"mobile-image1"),page  %>
+          <% else %>
+              <%=link_to image_tag("tree.png",:width=>"46px;",:height=>"55px;",:class=>"img-thumbnail"),page  %>
+          <% end %>
+        </div>
+        <p style="position: relative;bottom: 40px;left: 50px;font-size: 80%"><b><%= page.name %></b>
+          <br>
+          My tree<% if page.blog.present? %>
+              <% page.blog.take(2).each do |friendship| %>
+                  <%= link_to friendship.name, friendship%> ,
+              <% end %>
+          <% else %>
+              No tree now
+          <% end %>
+        </p>
+      </div>
+    </div>
+<%end%>
+
+<%= will_paginate @users %>

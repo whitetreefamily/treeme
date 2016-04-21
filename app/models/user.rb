@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessor :old_password
-
+  attr_accessor :password_confirmation
   before_save :encrypt_password
   before_update :encrypt_password
   attr_accessor :password, :password_confirmation
@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   validates_length_of :password, :minimum => 7, :allow_blank => true,:on => :create
   validates :password, :presence => true,:on => :create
   validates_confirmation_of :password, :presence => true,:message => "Please let your password be the same confirmation"
+  validates :password_confirmation,:on => :update, :presence => true, :if => '!password.nil?'
   has_many :branches
   has_many :pages, :through => :branches,:dependent => :destroy
   mount_uploader :image, ImageUploader
@@ -21,7 +22,7 @@ class User < ActiveRecord::Base
   has_many :comments ,  :dependent => :destroy
   has_and_belongs_to_many :categories
   has_many :blog, :class_name => "Page" ,:dependent => :destroy
-
+  has_one :admin,:dependent => :destroy
   before_create { generate_token(:auth_token) }
   def can_branch_for?(page)
     branches.build(page: 1, page: page).valid?

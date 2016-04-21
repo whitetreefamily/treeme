@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Page:</strong>
+  <%= @info.page_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @info.name %>
+</p>
+<% @page   =  @info.page %>
+<%=  @page  %>
+<%= link_to 'Destroy', delete_page_page_path(@page),  data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Edit', edit_info_path(@info) %> |
+<%= link_to 'Back', infos_path %>

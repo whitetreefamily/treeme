@@ -105,6 +105,7 @@
     <% end %>
   </div>
 </div>
+
 <% if current_user   %>
 <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -115,7 +116,7 @@
             <h4 class="modal-title">Comment</h4>
           </div>
           <div class="modal-body">
-            <%=render "comments/new" %>
+            <%= render :partial =>  'comments/new',  :locals => {:@comment => Comment.new(:article_id => @article.id)}%>
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->

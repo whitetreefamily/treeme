@@ -1,0 +1,56 @@
+<div class="index-user-all">
+    <div class="index-body-input" style="margin-bottom: 1%">
+      <div class="index-list-body">
+        <h3> <b>Admin  Suggestions</b></h3>
+           Categories
+      </div>
+      <div  class="qf b aml" style="height: 50px;margin-bottom: 1%">
+
+        </div><!-- /input-group -->
+      </div>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Admin username</th>
+            <th>Check</th>
+            <th>User</th>
+            <th>position</th>
+            <th>Check admin</th>
+            <th colspan="3"></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <%  @categories.each do |category| %>
+              <tr>
+                <td><%= link_to category.name, category %></td>
+                <td><%= form_for(category) do |f| %>
+                      <%= f.text_field :name, placeholder: "Enter your admin username", :class=>"form-control" %>
+                      </td>
+                      <td><%= f.submit "submit", :class=>"btn btn-success"%></td>
+                  <% end %>
+                  <td><%= link_to 'Show', category %></td>
+                  <td><%= link_to 'Edit', edit_category_path(category) %></td>
+                  <td><%= link_to 'Destroy', category, method: :delete,:class=>"btn btn-danger", data: { confirm: 'Are you sure?' } %></td>
+                  </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+        <br>
+
+
+
+
+  <div  class="qf b aml" style="height: 50px;margin-bottom: 1%">
+
+      <%= link_to "Add category", new_category_path,:class=>"btn btn-info" %>
+
+  </div><!-- /input-group -->
+  </div>
+
+
+
+  <div class="index-list-body1">
+    <%= render "pages/caro" %>
+  </div>

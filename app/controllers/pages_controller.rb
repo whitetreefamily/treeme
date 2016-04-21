@@ -14,18 +14,35 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
-    @articles = @page.articles.order(:created_at => :desc).page(params[:page]).per_page(2)
+    @articles = @page.articles.order(:created_at => :desc).page(params[:page]).per_page(1)
     @page.increment
+    if @page.info.present?
+    else
+      @page.create_info
+    end
   end
 
   # GET /pages/form
   def new
-
+    @page = Page.new
   end
+
+
 
   # GET /pages/1/edit
   def edit
   end
+
+  def delete_page
+    @page = Page.find(params[:id])
+    @page.destroy
+    respond_to do |format|
+      format.html { redirect_to current_user, notice: 'Account deleted' }
+      format.mobile { redirect_to pages_url, notice: 'Account deleted' }
+    end
+  end
+
+
 
   def vote
     vote = current_user.branches.build(:page_id => params[:page_id],:check => 1)
@@ -42,10 +59,10 @@ class PagesController < ApplicationController
     respond_to do |format|
       if @page.save
         format.html { redirect_to @page, notice: 'Tree created.' }
-        format.json { render :show, status: :created, location: @page }
+        format.mobile { redirect_to @page, notice: 'Tree created.' }
       else
         format.html { render :new }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
+        format.mobile { render :new }
       end
     end
   end
@@ -56,10 +73,10 @@ class PagesController < ApplicationController
     respond_to do |format|
       if @page.update(page_params)
         format.html { redirect_to @page, notice: 'Tree updated.' }
-        format.json { render :show, status: :ok, location: @page }
+        format.mobile { redirect_to @page, notice: 'Tree updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
+        format.mobile { render :edit }
       end
     end
   end
@@ -74,6 +91,9 @@ class PagesController < ApplicationController
     end
   end
 
+  def create_info
+    Info.new(:page_id => params[:page_id])
+  end
 
   private
   def set_check
@@ -81,9 +101,13 @@ class PagesController < ApplicationController
   end
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_page
+    def set_page1
       @page = Page.find(params[:id])
     end
+
+  def set_page
+    @page = Page.friendly.find(params[:id])
+  end
 
 
     # Never trust parameters from the scary internet, only allow the white list through.
